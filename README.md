@@ -1,2 +1,0 @@
-# Pharmd
-Class project

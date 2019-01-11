@@ -1,0 +1,69 @@
+﻿@page
+@model Phramd.Pages.AccountModel
+@{
+    ViewData["Title"] = "Account";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+@if (Program.UserDetails.UserID != 0)
+{
+    <div class="nav">
+        <div class="logo">
+            <a href="/Index" class="navLinks">
+                <img src="~/images/PhramdLogo.png" alt="PhramdLogo">
+            </a>
+        </div>
+        <div class="about">
+            <a href="#" class="navLinks">About</a>
+        </div>
+        <div class="contact">
+            <a href="#" class="navLinks">Contact</a>
+        </div>
+        <div class="uname">
+            <p>
+                <a href="#" class="navLinks"><i class="fas fa-user-circle"></i></a><br />
+                Hello <b>@Program.UserDetails.Username!</b>
+            </p>
+            <div class="unameContetnt">
+                <form method="post" asp-page-handler="Logout">
+                    <input type="submit" class="navLinks" name="Logout" value="Logout" />
+                </form>
+                <a href="#accountSettings" class="navLinks">Settings</a>
+            </div>
+        </div>
+    </div>
+}
+    <div class="accountSettings-div">
+        <div id="accountSettings" class="accountSettings">
+            <h2>Account Settings</h2>
+            <h3>Calendar</h3>
+            <form method="post" asp-page-handler="Calendar"></form>
+            <h3>Photos</h3>
+            <form method="post" asp-page-handler="Photos"></form>
+        </div>
+    </div>
+
+<div class="footer">
+    <div class="f1">
+        <img src="~/images/VSlogo.svg.png" alt="Visual Studio" />
+    </div>
+    <div class="f2">
+        <img src="~/images/dotnetcoreLogo.png" alt=".Net Core" />
+    </div>
+    <div class="f3">
+        <img src="~/images/csharpLogo.png" alt="C#" />
+    </div>
+    <div class="f4">
+        <p>&copy; 2018 - PHRAMD</p>
+    </div>
+    <div class="f5">
+        <img src="~/images/sqlserverLogo.png" alt="SQL Server" />
+    </div>
+    <div class="f6">
+        <img src="~/images/HTML5Badge.png" alt="HTML 5" />
+    </div>
+    <div class="f7">
+        <img src="~/images/CSS3Logo.png" alt="CSS 3" />
+    </div>
+</div>
+
