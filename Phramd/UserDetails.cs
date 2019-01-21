@@ -11,6 +11,10 @@ namespace Phramd
         public int UserID { get; set; }
         public string Username { get; set; }
         public bool isAddUser { get; set; }
+        //public List<string> emails { get; set; }
+        public string emails { get; set; }
+        public string emailsA { get; set; }
+        public string emailsM { get; set; }
 
         public void CheckID(string username, string password)
         {
@@ -34,8 +38,55 @@ namespace Phramd
                 {
                     UserID = Convert.ToInt32(result);
                     Username = username;
-
                 }
+
+                //gmail
+                SqlCommand returnEmail = new SqlCommand();
+                returnEmail.Connection = myConn;
+
+                returnEmail.Parameters.AddWithValue("@UserID", UserID);
+
+                returnEmail.CommandText = ("[spEmailReturn]");
+                returnEmail.CommandType = System.Data.CommandType.StoredProcedure;
+
+                var email = returnEmail.ExecuteScalar();
+
+                if (email != null)
+                {
+                    emails = Convert.ToString(email); 
+                }
+
+                /*//apple
+                SqlCommand returnApple = new SqlCommand();
+                returnApple.Connection = myConn;
+
+                returnApple.Parameters.AddWithValue("@UserID", UserID);
+
+                returnApple.CommandText = ("[spEmailApple]");
+                returnApple.CommandType = System.Data.CommandType.StoredProcedure;
+
+                var emailApple = returnEmail.ExecuteScalar();
+
+                if (emailApple != null)
+                {
+                    emailsA = Convert.ToString(emailApple);
+                }
+
+                //microsoft
+                SqlCommand returnMicro = new SqlCommand();
+                returnMicro.Connection = myConn;
+
+                returnMicro.Parameters.AddWithValue("@UserID", UserID);
+
+                returnMicro.CommandText = ("[spEmailMicro]");
+                returnMicro.CommandType = System.Data.CommandType.StoredProcedure;
+
+                var emailMicro = returnEmail.ExecuteScalar();
+
+                if (emailMicro != null)
+                {
+                    emailsM = Convert.ToString(emailMicro);
+                }*/
             }
         }
     }

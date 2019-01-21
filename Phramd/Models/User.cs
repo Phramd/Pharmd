@@ -20,10 +20,8 @@ namespace Phramd.Models
         [MaxLength(100)]
         public string password { get; set; }
 
-        [Required]
-        [StringLength(1, MinimumLength = 1)]
-        public string status { get; set; }
-
         public DateTime signupdate { get; set; }
+
+        public DateTime canceldate { get; set; }
     }
 }

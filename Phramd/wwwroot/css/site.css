@@ -253,7 +253,16 @@ hr {
         transform: scale(1)
     }
 }
-
+/* Account page */
+.hiddenGmail, .hiddenApple, .hiddenMicro {
+    display: none;
+}
+.calImages img {
+    width: 100px;
+}
+.gmailCal, .appleCal, .microCal {
+    padding: 0 20px 0 20px;
+}
 /* Rearrange for smaller screens */
 @media screen and (max-width: 700px) {
 }

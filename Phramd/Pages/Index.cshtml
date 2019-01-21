@@ -73,10 +73,33 @@
         <div class="accountSettings-div">
             <div id="accountSettings" class="accountSettings">
                 <h2>Account Settings</h2>
-                <h3>Photos</h3>
-                <form method="post" asp-page-handler="Photos">
-                    
+                <h3>Calendar</h3>
+                <hr>
+                <div id="showForm" class="calImages">
+                    <a class="gmailCal" href="#"><img src="~/images/google-calendar-logo.png" alt="google cal image" /></a>
+                    <a class="appleCal" href="#"><img src="~/images/iOS-Calendar-icon.png" alt="apple cal image" /></a>
+                    <a class="microCal" href="#"><img src="~/images/Microsoft_Outlook_2013_logo.svg_-250x250.png" alt="microsoft cal image" /></a>
+                </div>
+                <form class="hiddenGmail" method="post" asp-page-handler="CalendarGmail">
+                    <input type="text" placeholder="@Program.UserDetails.emails" name="email">
+                    <button type="submit">Save Gmail</button>
+                    <button method="post" asp-page-handler="CalendarRemove" type="submit">Remove</button>
                 </form>
+                <form class="hiddenApple" method="post" asp-page-handler="CalendarApple">
+                    <input type="text" placeholder="@Program.UserDetails.emailsA" name="email">
+                    <button type="submit">Save Apple</button>
+                    <button method="post" asp-page-handler="CalendarRemove" type="submit">Remove</button>
+                </form>
+                <form class="hiddenMicro" method="post" asp-page-handler="CalendarMicro">
+                    <input type="text" placeholder="@Program.UserDetails.emailsM" name="email">
+                    <button type="submit">Save Microsoft</button>
+                    <button method="post" asp-page-handler="CalendarRemove" type="submit">Remove</button>
+                </form>
+                <br />
+                <br />
+                <h3>Photos</h3>
+                <hr>
+                <form method="post" asp-page-handler="Photos"></form>
             </div>
         </div>
     }

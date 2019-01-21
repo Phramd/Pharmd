@@ -10,8 +10,8 @@ using Phramd.Models;
 namespace Phramd.Migrations
 {
     [DbContext(typeof(PhramdContext))]
-    [Migration("20181218152133_iniitial")]
-    partial class iniitial
+    [Migration("20190118163047_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,11 +21,41 @@ namespace Phramd.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Phramd.Models.CalendarModel", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("UserID");
+
+                    b.Property<string>("apple")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("emailadded");
+
+                    b.Property<DateTime>("emailremoved");
+
+                    b.Property<string>("gmail")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("microsoft")
+                        .HasMaxLength(100);
+
+                    b.HasKey("id");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("CalendarModel");
+                });
+
             modelBuilder.Entity("Phramd.Models.User", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("canceldate");
 
                     b.Property<string>("email")
                         .IsRequired()
@@ -37,10 +67,6 @@ namespace Phramd.Migrations
 
                     b.Property<DateTime>("signupdate");
 
-                    b.Property<string>("status")
-                        .IsRequired()
-                        .HasMaxLength(1);
-
                     b.Property<string>("username")
                         .IsRequired()
                         .HasMaxLength(100);
@@ -48,6 +74,14 @@ namespace Phramd.Migrations
                     b.HasKey("id");
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("Phramd.Models.CalendarModel", b =>
+                {
+                    b.HasOne("Phramd.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

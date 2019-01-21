@@ -20,6 +20,7 @@ namespace Phramd
     {
         public static UserDetails UserDetails = new UserDetails();
         public static Calendar Calendar = new Calendar();
+        public static CalendarDetails CalendarDetails = new CalendarDetails();
         public static Fetch Fetch = new Fetch();
 
         public static void Main(string[] args)
