@@ -15,6 +15,7 @@ namespace Phramd
         public string emails { get; set; }
         public string emailsA { get; set; }
         public string emailsM { get; set; }
+        public int emailMicroID { get; set; }
 
         public void CheckID(string username, string password)
         {
@@ -39,10 +40,18 @@ namespace Phramd
                     UserID = Convert.ToInt32(result);
                     Username = username;
                 }
+                myConn.Close();
+            }
+        }
 
+        public void EmailChanges(int UserID)
+        {
+            using (SqlConnection myConn = new SqlConnection(Program.Fetch.cs))
+            {
                 //gmail
                 SqlCommand returnEmail = new SqlCommand();
                 returnEmail.Connection = myConn;
+                myConn.Open();
 
                 returnEmail.Parameters.AddWithValue("@UserID", UserID);
 
@@ -53,12 +62,7 @@ namespace Phramd
 
                 if (email != null)
                 {
-                    emails = Convert.ToString(email); 
-                }
-
-                if (Program.UserDetails.UserID != 0 && @Program.UserDetails.emails != null)
-                {
-                    Program.Calendar.CalendarSetUp();
+                    emails = Convert.ToString(email);
                 }
 
                 //apple
@@ -92,6 +96,8 @@ namespace Phramd
                 {
                     emailsM = Convert.ToString(emailMicro);
                 }
+
+                myConn.Close();
             }
         }
     }

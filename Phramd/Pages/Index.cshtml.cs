@@ -20,7 +20,8 @@ namespace Phramd.Pages
 
         public void OnPostLogin(string username, string password)
         {
-            Program.UserDetails.CheckID(username, password); 
+            Program.UserDetails.CheckID(username, password);
+            Program.UserDetails.EmailChanges(Program.UserDetails.UserID);
         }
 
         public void OnPostLogout()
@@ -78,6 +79,8 @@ namespace Phramd.Pages
                     if (result != null)
                     {
                         email = Program.CalendarDetails.Gmail;
+                        Program.UserDetails.EmailChanges(Program.UserDetails.UserID);
+                        Program.Calendar.CalendarSetUp();
                     }
 
                     myConn.Close();
@@ -108,6 +111,7 @@ namespace Phramd.Pages
                     if (result != null)
                     {
                         email = Program.CalendarDetails.Apple;
+                        Program.UserDetails.EmailChanges(Program.UserDetails.UserID);
                     }
 
                     myConn.Close();
@@ -138,6 +142,7 @@ namespace Phramd.Pages
                     if (result != null)
                     {
                         email = Program.CalendarDetails.Microsoft;
+                        Program.UserDetails.EmailChanges(Program.UserDetails.UserID);
                     }
 
                     myConn.Close();
@@ -145,7 +150,7 @@ namespace Phramd.Pages
             }
         }
 
-        public void OnPostCalendarRemove(string email)
+        public void OnPostCalendarRemoveGmail(string email)
         {
             using (SqlConnection myConn = new SqlConnection(Program.Fetch.cs))
             {
@@ -157,7 +162,63 @@ namespace Phramd.Pages
                     };
                     myConn.Open();
 
-                    removeCal.Parameters.AddWithValue("@emailremoved", "GETDATE()");
+                    removeCal.Parameters.AddWithValue("@UserID", Program.UserDetails.UserID);
+                    removeCal.Parameters.AddWithValue("@email", Program.UserDetails.emails);
+
+                    removeCal.CommandText = ("[spRemoveCalEmail]");
+                    removeCal.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    var result = removeCal.ExecuteScalar();
+
+                    if (result == null)
+                    {
+                        Program.UserDetails.EmailChanges(Program.UserDetails.UserID);
+                    }
+                    
+                    myConn.Close();
+                }
+            }
+        }
+
+        public void OnPostCalendarRemoveApple(string email)
+        {
+            using (SqlConnection myConn = new SqlConnection(Program.Fetch.cs))
+            {
+                if (Program.UserDetails.UserID != 0)
+                {
+                    SqlCommand removeCal = new SqlCommand
+                    {
+                        Connection = myConn
+                    };
+                    myConn.Open();
+
+                    removeCal.Parameters.AddWithValue("@UserID", Program.UserDetails.UserID);
+                    removeCal.Parameters.AddWithValue("@email", Program.UserDetails.emailsA);
+
+                    removeCal.CommandText = ("[spRemoveCalEmail]");
+                    removeCal.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    var result = removeCal.ExecuteScalar();
+
+                    myConn.Close();
+                }
+            }
+        }
+
+        public void OnPostCalendarRemoveMicro(string email)
+        {
+            using (SqlConnection myConn = new SqlConnection(Program.Fetch.cs))
+            {
+                if (Program.UserDetails.UserID != 0)
+                {
+                    SqlCommand removeCal = new SqlCommand
+                    {
+                        Connection = myConn
+                    };
+                    myConn.Open();
+
+                    removeCal.Parameters.AddWithValue("@UserID", Program.UserDetails.UserID);
+                    removeCal.Parameters.AddWithValue("@email", Program.UserDetails.emailsM);
 
                     removeCal.CommandText = ("[spRemoveCalEmail]");
                     removeCal.CommandType = System.Data.CommandType.StoredProcedure;

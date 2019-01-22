@@ -81,19 +81,19 @@
                     <a class="microCal" href="#"><img src="~/images/Microsoft_Outlook_2013_logo.svg_-250x250.png" alt="microsoft cal image" /></a>
                 </div>
                 <form class="hiddenGmail" method="post" asp-page-handler="CalendarGmail">
-                    <input type="text" placeholder=""  name="email">
+                    <input type="text" placeholder="Enter Email" value="@Program.UserDetails.emails" name="email">
                     <button type="submit">Save Gmail</button>
-                    <button method="post" asp-page-handler="CalendarRemove" type="submit">Remove</button>
+                    <button method="post" asp-page-handler="CalendarRemoveGmail" type="submit">Remove</button>
                 </form>
                 <form class="hiddenApple" method="post" asp-page-handler="CalendarApple">
-                    <input type="text" placeholder="@Program.UserDetails.emailsA" name="email">
+                    <input type="text" placeholder="Enter Email" value="@Program.UserDetails.emailsA" name="email">
                     <button type="submit">Save Apple</button>
-                    <button method="post" asp-page-handler="CalendarRemove" type="submit">Remove</button>
+                    <button method="post" asp-page-handler="CalendarRemoveApple" type="submit">Remove</button>
                 </form>
                 <form class="hiddenMicro" method="post" asp-page-handler="CalendarMicro">
-                    <input type="text" placeholder="@Program.UserDetails.emailsM" name="email">
+                    <input type="text" placeholder="Enter Email" value="@Program.UserDetails.emailsM" name="email">
                     <button type="submit">Save Microsoft</button>
-                    <button method="post" asp-page-handler="CalendarRemove" type="submit">Remove</button>
+                    <button method="post" asp-page-handler="CalendarRemoveMicro" type="submit">Remove</button>
                 </form>
                 <br />
                 <br />
