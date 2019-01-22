@@ -56,7 +56,12 @@ namespace Phramd
                     emails = Convert.ToString(email); 
                 }
 
-                /*//apple
+                if (Program.UserDetails.UserID != 0 && @Program.UserDetails.emails != null)
+                {
+                    Program.Calendar.CalendarSetUp();
+                }
+
+                //apple
                 SqlCommand returnApple = new SqlCommand();
                 returnApple.Connection = myConn;
 
@@ -65,7 +70,7 @@ namespace Phramd
                 returnApple.CommandText = ("[spEmailApple]");
                 returnApple.CommandType = System.Data.CommandType.StoredProcedure;
 
-                var emailApple = returnEmail.ExecuteScalar();
+                var emailApple = returnApple.ExecuteScalar();
 
                 if (emailApple != null)
                 {
@@ -81,12 +86,12 @@ namespace Phramd
                 returnMicro.CommandText = ("[spEmailMicro]");
                 returnMicro.CommandType = System.Data.CommandType.StoredProcedure;
 
-                var emailMicro = returnEmail.ExecuteScalar();
+                var emailMicro = returnMicro.ExecuteScalar();
 
                 if (emailMicro != null)
                 {
                     emailsM = Convert.ToString(emailMicro);
-                }*/
+                }
             }
         }
     }

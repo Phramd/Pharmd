@@ -20,7 +20,7 @@ namespace Phramd
         static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
         static string ApplicationName = "Phramd";
 
-        static void CalendarSetUp()
+        public void CalendarSetUp()
         {
             UserCredential credential;
 
@@ -31,7 +31,7 @@ namespace Phramd
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
                     Scopes,
-                    Program.CalendarDetails.email,
+                    Program.UserDetails.emails,
                     CancellationToken.None,
                     new FileDataStore(credPath, true)).Result;
             }
