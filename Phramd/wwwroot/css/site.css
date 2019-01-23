@@ -40,7 +40,7 @@ body {
     grid-template-columns: repeat(10, 1fr);
     grid-auto-rows: auto;
     grid-gap: 10px;
-    background: rgb(0,0,0);
+    background-color: #000;
     z-index: 3;
     position: fixed;
     align-items: center;
@@ -255,13 +255,13 @@ hr {
     }
 }
 /* Account page */
-.hiddenGmail, .hiddenApple, .hiddenMicro {
+.hiddenGmail, .hiddenApple, .hiddenMicro, hiddenGPhoto {
     display: none;
 }
 .calImages img {
     width: 100px;
 }
-.gmailCal, .appleCal, .microCal {
+.gmailCal, .appleCal, .microCal, gPhoto {
     padding: 0 20px 0 20px;
 }
 /* Rearrange for smaller screens */

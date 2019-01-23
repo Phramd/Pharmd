@@ -15,5 +15,9 @@ $(function () {
     $(".microCal").on("click", function () {
         $(".hiddenMicro").toggle()
     })
+    $(".gPhoto").on("click", function () {
+        $(".hiddenGPhoto").toggle()
+    })
+    
 }
 )

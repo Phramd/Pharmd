@@ -22,6 +22,8 @@ namespace Phramd
         public static Calendar Calendar = new Calendar();
         public static CalendarDetails CalendarDetails = new CalendarDetails();
         public static Fetch Fetch = new Fetch();
+        //public static GooglePhotos.GooglePhotosClientIntegrationTests GooglePhotos = 
+            //new GooglePhotos.GooglePhotosClientIntegrationTests();
 
         public static void Main(string[] args)
         {

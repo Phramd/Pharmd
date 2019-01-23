@@ -99,6 +99,14 @@
                 <br />
                 <h3>Photos</h3>
                 <hr>
+                <div id="showForm" class="calImages">
+                    <a class="gPhoto" href="#"><img src="~/images/google-photos-icon-250x250.png" alt="google photos" /></a>
+                </div>
+                <form class="hiddenGPhoto" method="post" asp-page-handler="PhotoGmail">
+                    <input type="text" placeholder="Enter Email" value="@Program.UserDetails.emails" name="email">
+                    <button type="submit">Save Google Photos</button>
+                    <button method="post" asp-page-handler="PhotoRemoveGmail" type="submit">Remove</button>
+                </form>
                 <form method="post" asp-page-handler="Photos"></form>
             </div>
         </div>
