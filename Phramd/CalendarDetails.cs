@@ -14,7 +14,6 @@ namespace Phramd
         public string Gmail { get; set; }
         public string Apple { get; set; }
         public string Microsoft { get; set; }
-        public int cartID { get; set; }
 
     }   
 }

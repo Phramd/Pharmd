@@ -13,7 +13,7 @@ namespace Phramd.GooglePhotos
     public class GooglePhotosClientIntegrationTests
     {
         private readonly GooglePhotosClient googlePhotosClient;
-
+        public string userEmail = Program.UserDetails.GPhoto;
         public GooglePhotosClientIntegrationTests()
         {
             HttpClient httpClient = new HttpClient();
@@ -23,7 +23,7 @@ namespace Phramd.GooglePhotos
                 userCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
                     new[] { "https://www.googleapis.com/auth/photoslibrary.readonly" },
-                    Program.UserDetails.emails,
+                    userEmail,
                     CancellationToken.None).Result;
             }
 
@@ -32,7 +32,6 @@ namespace Phramd.GooglePhotos
             this.googlePhotosClient = new GooglePhotosClient(clientSettings);
         }
 
-        [Fact]
         public void Test_ListAlbums_GetFirstAlbum()
         {
             ListAlbumsResponse listAlbumsResponse = this.googlePhotosClient.ListAlbums();

@@ -255,7 +255,7 @@ hr {
     }
 }
 /* Account page */
-.hiddenGmail, .hiddenApple, .hiddenMicro, hiddenGPhoto {
+.hiddenGmail, .hiddenApple, .hiddenMicro, .hiddenGPhoto {
     display: none;
 }
 .calImages img {

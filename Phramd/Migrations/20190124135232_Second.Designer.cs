@@ -10,8 +10,8 @@ using Phramd.Models;
 namespace Phramd.Migrations
 {
     [DbContext(typeof(PhramdContext))]
-    [Migration("20190118163047_Initial")]
-    partial class Initial
+    [Migration("20190124135232_Second")]
+    partial class Second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,34 @@ namespace Phramd.Migrations
                     b.ToTable("CalendarModel");
                 });
 
+            modelBuilder.Entity("Phramd.Models.PhotoAccounts", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("UserID");
+
+                    b.Property<string>("apple")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("emailadded");
+
+                    b.Property<DateTime>("emailremoved");
+
+                    b.Property<string>("gmail")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("microsoft")
+                        .HasMaxLength(100);
+
+                    b.HasKey("id");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("PhotoAccounts");
+                });
+
             modelBuilder.Entity("Phramd.Models.User", b =>
                 {
                     b.Property<int>("id")
@@ -77,6 +105,14 @@ namespace Phramd.Migrations
                 });
 
             modelBuilder.Entity("Phramd.Models.CalendarModel", b =>
+                {
+                    b.HasOne("Phramd.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Phramd.Models.PhotoAccounts", b =>
                 {
                     b.HasOne("Phramd.Models.User", "User")
                         .WithMany()

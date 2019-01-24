@@ -17,10 +17,6 @@ namespace Phramd.GooglePhotos
 
         private readonly GooglePhotosClientSettings clientSettings;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GooglePhotosClient"/> class.
-        /// </summary>
-        /// <param name="clientSettings">Client settings with required objects to perform API calls.</param>
         public GooglePhotosClient(GooglePhotosClientSettings clientSettings)
         {
             this.clientSettings = clientSettings;
@@ -31,7 +27,7 @@ namespace Phramd.GooglePhotos
             string pageToken = "",
             bool excludeNonAppCreatedData = false)
         {
-            // Prepare request
+
             HttpRequestMessage request = new HttpRequestMessage(
                 HttpMethod.Get,
                 ListAlbumsUrl
@@ -41,33 +37,22 @@ namespace Phramd.GooglePhotos
             request.Headers.Authorization =
                 GetAuthenticationHeaderValue(this.clientSettings.UserCredential.Token.AccessToken);
 
-            // Execute request
             HttpResponseMessage response = this.clientSettings.HttpClient.SendAsync(request).Result;
 
-            // Analyze response
             string body = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<ListAlbumsResponse>(body);
         }
 
-        /// <summary>
-        /// Returns the album based on the specified 'albumId'. The 'albumId' should be the ID of an album owned by the
-        /// user or a shared album that the user has joined.
-        /// </summary>
-        /// <param name="albumId">Identifier of the album to be requested.</param>
-        /// <returns>An <see cref="Album"/> object.</returns>
         public Album GetAlbum(string albumId)
         {
-            // Prepare request
             HttpRequestMessage request = new HttpRequestMessage(
                 HttpMethod.Get,
                 GetAlbumUrl.Replace("{albumId}", albumId));
             request.Headers.Authorization =
                 GetAuthenticationHeaderValue(this.clientSettings.UserCredential.Token.AccessToken);
 
-            // Execute request
             HttpResponseMessage response = this.clientSettings.HttpClient.SendAsync(request).Result;
 
-            // Analyze response
             string body = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<Album>(body);
         }

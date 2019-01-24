@@ -13,11 +13,13 @@ namespace Phramd.Models
 
         public DbSet<User> User { get; set; }
         public DbSet<CalendarModel> CalendarModel { get; set; }
+        public DbSet<PhotoAccounts> PhotoAccounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("User");
             modelBuilder.Entity<CalendarModel>().ToTable("CalendarModel");
+            modelBuilder.Entity<PhotoAccounts>().ToTable("PhotoAccounts");
         }
     }
 }

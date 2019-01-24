@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Phramd.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Second : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,8 +34,8 @@ namespace Phramd.Migrations
                     gmail = table.Column<string>(maxLength: 100, nullable: true),
                     apple = table.Column<string>(maxLength: 100, nullable: true),
                     microsoft = table.Column<string>(maxLength: 100, nullable: true),
-                    emailadded = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
-                    emailremoved = table.Column<DateTime>(nullable: true),
+                    emailadded = table.Column<DateTime>(nullable: false),
+                    emailremoved = table.Column<DateTime>(nullable: true, defaultValueSql: "GETDATE()"),
                     UserID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -49,9 +49,38 @@ namespace Phramd.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "PhotoAccounts",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    gmail = table.Column<string>(maxLength: 100, nullable: true),
+                    apple = table.Column<string>(maxLength: 100, nullable: true),
+                    microsoft = table.Column<string>(maxLength: 100, nullable: true),
+                    emailadded = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
+                    emailremoved = table.Column<DateTime>(nullable: true),
+                    UserID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PhotoAccounts", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_PhotoAccounts_User_UserID",
+                        column: x => x.UserID,
+                        principalTable: "User",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_CalendarModel_UserID",
                 table: "CalendarModel",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PhotoAccounts_UserID",
+                table: "PhotoAccounts",
                 column: "UserID");
         }
 
@@ -59,6 +88,9 @@ namespace Phramd.Migrations
         {
             migrationBuilder.DropTable(
                 name: "CalendarModel");
+
+            migrationBuilder.DropTable(
+                name: "PhotoAccounts");
 
             migrationBuilder.DropTable(
                 name: "User");

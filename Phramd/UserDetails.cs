@@ -11,11 +11,11 @@ namespace Phramd
         public int UserID { get; set; }
         public string Username { get; set; }
         public bool isAddUser { get; set; }
-        //public List<string> emails { get; set; }
         public string emails { get; set; }
         public string emailsA { get; set; }
         public string emailsM { get; set; }
         public int emailMicroID { get; set; }
+        public string GPhoto { get; set; }
 
         public void CheckID(string username, string password)
         {
@@ -98,6 +98,29 @@ namespace Phramd
                 }
 
                 myConn.Close();
+            }
+        }
+
+        public void PhotoChanges(int UserID)
+        {
+            using (SqlConnection myConn = new SqlConnection(Program.Fetch.cs))
+            {
+                //gmail
+                SqlCommand returnEmail = new SqlCommand();
+                returnEmail.Connection = myConn;
+                myConn.Open();
+
+                returnEmail.Parameters.AddWithValue("@UserID", UserID);
+
+                returnEmail.CommandText = ("[spPhotoAccountReturn]");
+                returnEmail.CommandType = System.Data.CommandType.StoredProcedure;
+
+                var email = returnEmail.ExecuteScalar();
+
+                if (email != null)
+                {
+                    GPhoto = Convert.ToString(email);
+                }
             }
         }
     }
