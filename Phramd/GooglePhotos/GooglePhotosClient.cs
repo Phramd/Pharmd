@@ -15,6 +15,10 @@ namespace Phramd.GooglePhotos
 
         private const string GetAlbumUrl = "https://photoslibrary.googleapis.com/v1/albums/{albumId}";
 
+        private const string ListAlbumURLContents = "https://photoslibrary.googleapis.com/v1/mediaItems/";
+
+        private const string GetAlbumContents = "https://photoslibrary.googleapis.com/v1/mediaItems/{mediaItemId}";
+
         private readonly GooglePhotosClientSettings clientSettings;
 
         public GooglePhotosClient(GooglePhotosClientSettings clientSettings)
@@ -55,6 +59,34 @@ namespace Phramd.GooglePhotos
 
             string body = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<Album>(body);
+        }
+
+        public ListMediaItemResponse ListAlbumContents()
+        {
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Get,
+                ListAlbumURLContents);
+            request.Headers.Authorization =
+                GetAuthenticationHeaderValue(this.clientSettings.UserCredential.Token.AccessToken);
+
+            HttpResponseMessage response = this.clientSettings.HttpClient.SendAsync(request).Result;
+
+            string body = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<ListMediaItemResponse>(body);    
+        }
+
+        public MediaItems GetAlbumContent(string Id)
+        {
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Get,
+                GetAlbumContents.Replace("{mediaItemId}", Id));
+            request.Headers.Authorization =
+                GetAuthenticationHeaderValue(this.clientSettings.UserCredential.Token.AccessToken);
+
+            HttpResponseMessage response = this.clientSettings.HttpClient.SendAsync(request).Result;
+
+            string body = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<MediaItems>(body);
         }
 
         private static AuthenticationHeaderValue GetAuthenticationHeaderValue(string accessToken)

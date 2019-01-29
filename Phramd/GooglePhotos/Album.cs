@@ -11,10 +11,10 @@ namespace Phramd.GooglePhotos
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
-        [JsonProperty(PropertyName = "title")]
+        [JsonProperty(PropertyName = "title")] //Title of album
         public string Title { get; set; }
 
-        [JsonProperty(PropertyName = "productUrl")]
+        [JsonProperty(PropertyName = "productUrl")]//URL to Album
         public string ProductUrl { get; set; }
 
         [JsonProperty(PropertyName = "isWriteable")]

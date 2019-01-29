@@ -107,10 +107,61 @@
                     <button type="submit">Save Google Photos</button>
                     <button method="post" asp-page-handler="PhotoRemoveGmail" type="submit">Remove</button>
                 </form>
-                <div>
-                    
-                </div>
-                <form method="post" asp-page-handler="Photos"></form>
+                <p>Weather</p>
+                <hr>
+                <form method="post" asp-page-handler="Weather">
+                    <select required class="drop" name="Country" @Model.selCountry>
+                        <option value="">Select A Country</option>
+                        <option value="CA">Canada</option>
+                    </select>
+                    <select required class="drop" name="City" @Model.selCity>
+                        <option value="">Select A City</option>
+                        <option value="toronto">Toronto</option>
+                        <option value="ottawa">Ottawa</option>
+                        <option value="montreal">Montreal</option>
+                        <option value="gatineau">Gatineau</option>
+                        <option value="quebec">Quebec City</option>
+                        <option value="london">London</option>
+                        <option value="sarnia">Sarnia</option>
+                        <option value="windsor">Windsor</option>
+                        <option value="kitchener">Kitchener</option>
+                        <option value="kingston">Kingston</option>
+                        <option value="oshawa">Oshawa</option>
+                        <option value="hamilton">Hamilton</option>
+                        <option value="guelph">Guelph</option>
+                    </select>
+                    <select required class="drop" name="Unit" @Model.selUnit>
+                        <option value="">Select A Unit of Measurement</option>
+                        <option value="metric">Metric</option>
+                        <option value="imperial">Imperial</option>
+                        <option value="kelvin">Kelvin</option>
+                    </select>
+                    <input type="submit" value="Get the Weather" />
+                </form>
+                <p>News</p>
+                <hr>
+                <form method="post" asp-page-handler="News">
+                    <select required class="drop" name="Coun" @Model.selCoun>
+                        <option value="">Select A Country</option>
+                        <option value="ca">Canada</option>
+                        <option value="us">United States</option>
+                    </select>
+                    <select required class="drop" name="Articles" @Model.numOfArticles>
+                        <option value="">Amount of Articles Wanted</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                    </select>
+                    <select required class="drop" name="Time">
+                        <option value="">Time To Read Headlines</option>
+                        <option value="10000">10 seconds</option>
+                        <option value="15000">15 seconds</option>
+                        <option value="20000">20 seconds</option>
+                    </select>
+                    <input type="submit" value="Get the News" />
+                </form>
+
+
             </div>
         </div>
     }

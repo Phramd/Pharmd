@@ -12,6 +12,7 @@ namespace Phramd.GooglePhotos
 {
     public class GooglePhotosClientIntegrationTests
     {
+        public string allGPhotos = Program.PhotoDetails.allGPhotos;
         private readonly GooglePhotosClient googlePhotosClient;
         public string userEmail = Program.UserDetails.GPhoto;
         public GooglePhotosClientIntegrationTests()
@@ -38,8 +39,19 @@ namespace Phramd.GooglePhotos
 
             foreach (Album album in listAlbumsResponse.Albums)
             {
-                Album singleAlbum = this.googlePhotosClient.GetAlbum(album.Id);
+                Album singleAlbum = this.googlePhotosClient.GetAlbum(album.Id); 
+                break;
+            } 
+        }
 
+        public void ListAlbumContent()
+        {
+            ListMediaItemResponse mediaItemResponse = this.googlePhotosClient.ListAlbumContents();
+
+            foreach (MediaItems photo in mediaItemResponse.MediaItems)
+            {
+                MediaItems allPhotos = googlePhotosClient.GetAlbumContent(photo.Id);
+                allGPhotos = photo.productUrl;
                 break;
             }
         }

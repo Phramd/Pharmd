@@ -11,29 +11,41 @@ namespace Phramd
         public string cs = "Server=(localdb)\\mssqllocaldb;Database=PhramdDB;Trusted_Connection=true";
         public HttpClient client = new HttpClient();
         public string Data { get; set; }
-        public string Bios { get; set; }
-        public string Images { get; set; }
-        public string Search { get; set; }
-        public string Videos { get; set; }
-        public string Details { get; set; }
-        public string Credits { get; set; }
-        public string Temp { get; set; }
+        public string Weather { get; set; }
+        public string News { get; set; }
 
-        public async Task GrabWeather()
+        public async Task GrabWeather(string selCity, string selCountry, string selUnit)
         {
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("applicationException/json"));
 
-            HttpResponseMessage response = await client.GetAsync("https://api.openweathermap.org/data/2.5/weather?q=London,Ca&units=metric&APPID=2c44fa8568a1b65b1865d69f48558362");
+            string wet_api = "7188b6a77c9693ed94470114f98e8761";
+            HttpResponseMessage weather = await client.GetAsync("https://api.openweathermap.org/data/2.5/weather?q=" + selCity + "," + selCountry + "&units=" + selUnit + "&APPID=" + wet_api);
 
-            if (response.IsSuccessStatusCode)
+            if (weather.IsSuccessStatusCode)
             {
-                Data = await response.Content.ReadAsStringAsync();
+                Data = await weather.Content.ReadAsStringAsync();
             }
-            else
+
+        }
+
+        public async Task GrabNews(string selCoun, string numOfArticles)
+        {
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("applicationException/json"));
+
+            string news_api = "64fe9e45b01d46ddb46fb999986ff796";
+            HttpResponseMessage news = await client.GetAsync("https://newsapi.org/v2/top-headlines?" + "country=" + selCoun + "&pageSize=" + numOfArticles + "&sortBy=popularity&apiKey=" + news_api);
+
+            if (news.IsSuccessStatusCode)
             {
-                Data = null; //this is so that if the search field is empty it does not show what was last searched
+                Data = await news.Content.ReadAsStringAsync();
             }
+        }
+
+        public string GetData()
+        {
+            return Data;
         }
     }
 }

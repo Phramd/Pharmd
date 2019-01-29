@@ -47,6 +47,33 @@ namespace Phramd.Migrations
                     b.ToTable("CalendarModel");
                 });
 
+            modelBuilder.Entity("Phramd.Models.NewsDB", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("articles")
+                        .IsRequired();
+
+                    b.Property<string>("country")
+                        .IsRequired();
+
+                    b.Property<string>("status")
+                        .IsRequired();
+
+                    b.Property<string>("time")
+                        .IsRequired();
+
+                    b.Property<int>("userId");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("News");
+                });
+
             modelBuilder.Entity("Phramd.Models.PhotoAccounts", b =>
                 {
                     b.Property<int>("id")
@@ -102,6 +129,33 @@ namespace Phramd.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("Phramd.Models.WeatherDB", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("city")
+                        .IsRequired();
+
+                    b.Property<string>("country")
+                        .IsRequired();
+
+                    b.Property<string>("status")
+                        .IsRequired();
+
+                    b.Property<string>("unit")
+                        .IsRequired();
+
+                    b.Property<int>("userId");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("Weather");
+                });
+
             modelBuilder.Entity("Phramd.Models.CalendarModel", b =>
                 {
                     b.HasOne("Phramd.Models.User", "User")
@@ -110,11 +164,27 @@ namespace Phramd.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Phramd.Models.NewsDB", b =>
+                {
+                    b.HasOne("Phramd.Models.User", "user")
+                        .WithMany()
+                        .HasForeignKey("userId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Phramd.Models.PhotoAccounts", b =>
                 {
                     b.HasOne("Phramd.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Phramd.Models.WeatherDB", b =>
+                {
+                    b.HasOne("Phramd.Models.User", "user")
+                        .WithMany()
+                        .HasForeignKey("userId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

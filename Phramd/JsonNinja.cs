@@ -1,15 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Phramd
 {
+    // info:
+    // : seperates name/vals
+    // , seperate items
+    // name is always in ""
+    // val is not always in "" (numbers not quoted)
     public class JsonNinja
     {
         List<string> names = new List<string>();
         List<string> vals = new List<string>();
-        List<string> imgVals = new List<string>();
+
+        public List<string> GetNames()
+        {
+            return names;
+        }
 
         public List<string> GetVals()
         {
@@ -17,11 +23,13 @@ namespace Phramd
         }
 
         public JsonNinja(string data)
+
         {
             names.Clear();
             vals.Clear();
             data = data.Replace("}", "");
             data = data.Replace("{", "");
+
             int startPos = 0;
             int endPos = 0;
             int endPosVal = 0;
@@ -41,7 +49,7 @@ namespace Phramd
                 }
                 if (data[k] == ':' && endFound == true)
                 {
-                    if (data[k + 1] == '[')
+                    if (data[k + 2] == '[')
                     {
                         collection = true;
                     }
@@ -49,9 +57,9 @@ namespace Phramd
                     endFound = false;
 
                     string nameCut = data.Substring(startPos, endPos - startPos);
+
                     names.Add(nameCut);
                 }
-
                 if (collection == true)
                 {
                     if (data[k] == '[')
@@ -75,6 +83,7 @@ namespace Phramd
                         }
                     }
                 }
+
                 else if ((data[k] == ',' && data[k + 1] == '"' && startFound == false) || k == data.Length - 1)
                 {
                     endPosVal = k;
@@ -87,80 +96,18 @@ namespace Phramd
             }
         } // end constructor
 
-        public List<string> GetNames()
+        public string GetInfo(string name)
         {
-            return names;
-        }
-
-        public void StackImages(JsonNinja ninja)
-        {
-            for (int i = 0; i < ninja.names.Count; i++)
-            {
-                if (ninja.names[i] == "\"file_path\"")
-                {
-                    imgVals.Add(ninja.vals[i].Substring(1, vals[i].Length - 2));
-                }
-            }
-        }
-
-        public List<string> GetAllImages()
-        {
-            return imgVals;
-        }
-
-        public List<string> GetImages(string name)
-        {
-            List<string> value = new List<string>();
+            string value = "";
             for (int i = 0; i < names.Count; i++)
             {
                 if (name == names[i])
                 {
-                    if (vals[i] != "null")
-                    {
-                        value.Add(vals[i].Substring(3, vals[i].Length - 4));
-                    }
-                    else
-                    {
-                        value.Add("");
-                    }
+                    value = vals[i];
                 }
             }
             // trims ""
-            return value;
-        }
-
-        public List<string> GetPosters(string name)
-        {
-            List<string> value = new List<string>();
-            for (int i = 0; i < names.Count; i++)
-            {
-                if (name == names[i])
-                {
-                    if (vals[i] != "null")
-                    {
-                        value.Add(vals[i].Substring(3, vals[i].Length - 4));
-                    }
-                    else
-                    {
-                        value.Add("");
-                    }
-                }
-            }
-            // trims ""
-            return value;
-        }
-
-        public List<string> GetIds(string name)
-        {
-            List<string> value = new List<string>();
-            for (int i = 1; i < names.Count; i++)
-            {
-                if (name == names[i])
-                {
-                    if (vals[i] != "null")
-                        value.Add(vals[i]);
-                }
-            }
+            //value = value.Substring(1, value.Length -2);
             return value;
         }
 
@@ -173,7 +120,7 @@ namespace Phramd
                 {
                     if (vals[i] != "null")
                     {
-                        value.Add(vals[i].Substring(1, vals[i].Length - 2));
+                        value.Add(vals[i]);
                     }
                     else
                     {
@@ -183,5 +130,7 @@ namespace Phramd
             }
             return value;
         }
-    }// end class
-}// end namespace
+
+
+    } // end class
+} // end namespace

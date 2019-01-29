@@ -5,19 +5,18 @@ window.onclick = function (event) {
     }
 }
 
-$(function () {
-    $(".gmailCal").on("click", function () {
-        $(".hiddenGmail").toggle()
-    })
-    $(".appleCal").on("click", function () {
-        $(".hiddenApple").toggle()
-    })
-    $(".microCal").on("click", function () {
-        $(".hiddenMicro").toggle()
-    })
-    $(".gPhoto").on("click", function () {
-        $(".hiddenGPhoto").toggle()
-    })
-    
-}
+$(function (){
+        $(".gmailCal").on("click", function () {
+            $(".hiddenGmail").toggle()
+        })
+        $(".appleCal").on("click", function () {
+            $(".hiddenApple").toggle()
+        })
+        $(".microCal").on("click", function () {
+            $(".hiddenMicro").toggle()
+        })
+        $(".gPhoto").on("click", function () {
+            $(".hiddenGPhoto").toggle()
+        })
+    }
 )
