@@ -14,7 +14,7 @@
                 </a>
             </div>
             <div class="about">
-                <a href="#about" class="navLinks">About</a>
+                <a href="#about" class="navLinks">Board Info</a>
             </div>
             <div class="contact">
                 <a href="#contact" class="navLinks">Contact</a>
@@ -30,18 +30,65 @@
         </div>
         <div class="slider-div">
             <div class="slider">
-                slider
+                <div>
+                    <img class="mySlides" src="~/images/PhramdSliderReal.png">
+                    <img class="mySlides" src="~/images/PhramdScreens.png">
+                    <img class="mySlides" src="~/images/CalemdarSlider.png">
+                    <img class="mySlides" src="~/images/PhotosSlider.png">
+                    <img class="mySlides" src="~/images/NewsSlider.png">
+                    <img class="mySlides" src="~/images/WeatherSlider.png">
+                </div>
             </div>
         </div>
         <div id="about" class="about-div">
+            <div class="boardInfo">
+                <h2>Board Info</h2>
+            </div>
+            <div class="borderAbout"></div>
             <div class="left">
-                Test Left
+                <h3>Digital Photo Frame</h3>
+                <p>
+                    Authorize your favorite photo sharing service such as Google Photos and let Phramd be your digital art display!
+                    Configure it to show your latest photos, or pull from a specific album. Have it change the photo at any interval you
+                    choose. There's no separate albums to manage, or SD cards to load. Phramd is a wifi connected, smart picture frame!
+                </p>
+                <h3>Smart Weather Station</h3>
+                <p>
+                    The weather can change at a moments notice! Set your location and your dashboard will always display the current
+                    weather conditions and 4 day forecast. Phramd is your digital weather station!
+                </p>
+                <h3>RSS News Feeds</h3>
+                <p>Phramd pulls the most popular RSS news feeds from ABC, BBC, CNN and many more!</p>
             </div>
             <div class="right">
-                Test Right
+                <h3>Simple Configuration</h3>
+                <p>
+                    The Phramd web app is configured through a simple web-based interface accessible from any laptop, tablet
+                    or smartphone.
+                </p>
+
+                <h3>Flexible Options</h3>
+                <p>
+                    Don't want to see the weather forecast? Don't want to see calendar events?
+                    No problem! Configure it with a click in the settings section.
+                </p>
+                <h3>Zero Maintenance</h3>
+                <p>
+                    Once configured, there's no SD cards to load, no additional calendars to update and no photos to upload.
+                    Phramd is a perfect smart home dashboard, always displaying your latest and relevant content!
+                </p>
             </div>
         </div>
-        <div id="contact" class="contact-div">contact</div>
+        <div id="contact" class="contact-div">
+            <h2>Contact</h2>
+            <div class="border"></div>
+            <form class="contactForm" action="/" method="post">
+                <input type="text" class="contactText" placeholder="Your Name" />
+                <input type="text" class="contactText" placeholder="Your Email" />
+                <textarea class="contactText" placeholder="Your Message"></textarea>
+                <button type="submit" class="contactFormBtn">Send</button>
+            </form>
+        </div>
     }
     @if (Program.UserDetails.UserID != 0)
     {
@@ -51,11 +98,11 @@
                     <img src="~/images/PhramdLogo.png" alt="PhramdLogo">
                 </a>
             </div>
-            <div class="about">
-                <a href="#" class="navLinks">About</a>
+            <div class="settings">
+                <a href="/Index" class="navLinks">User Settings</a>
             </div>
-            <div class="contact">
-                <a href="#" class="navLinks">Contact</a>
+            <div class="screen">
+                <a href="/Index/#screen" class="navLinks">Screen Options</a>
             </div>
             <div class="uname">
                 <p>
@@ -66,13 +113,12 @@
                     <form method="post" asp-page-handler="Logout">
                         <input type="submit" class="navLinks" name="Logout" value="Logout" />
                     </form>
-                    <a href="#accountSettings" class="navLinks">Settings</a>
                 </div>
             </div>
         </div>
         <div class="accountSettings-div">
             <div id="accountSettings" class="accountSettings">
-                <h2>Account Settings</h2>
+                <h2>User Settings</h2>
                 <h3>Calendar</h3>
                 <hr>
                 <div id="showForm" class="calImages">
@@ -81,19 +127,19 @@
                     <a class="microCal" href="#"><img src="~/images/Microsoft_Outlook_2013_logo.svg_-250x250.png" alt="microsoft cal image" /></a>
                 </div>
                 <form class="hiddenGmail" method="post" asp-page-handler="CalendarGmail">
-                    <input type="text" placeholder="Enter Email" value="@Program.UserDetails.emails" name="email">
+                    <input type="text" placeholder="Enter Gmail" value="@Program.UserDetails.emails" name="email">
                     <button type="submit">Save Gmail</button>
-                    <button method="post" asp-page-handler="CalendarRemoveGmail" type="submit">Remove</button>
+                    <button class="removeButton" method="post" asp-page-handler="CalendarRemoveGmail" type="submit">Remove</button>
                 </form>
                 <form class="hiddenApple" method="post" asp-page-handler="CalendarApple">
-                    <input type="text" placeholder="Enter Email" value="@Program.UserDetails.emailsA" name="email">
+                    <input type="text" placeholder="Enter iCloud" value="@Program.UserDetails.emailsA" name="email">
                     <button type="submit">Save Apple</button>
-                    <button method="post" asp-page-handler="CalendarRemoveApple" type="submit">Remove</button>
+                    <button class="removeButton" method="post" asp-page-handler="CalendarRemoveApple" type="submit">Remove</button>
                 </form>
                 <form class="hiddenMicro" method="post" asp-page-handler="CalendarMicro">
-                    <input type="text" placeholder="Enter Email" value="@Program.UserDetails.emailsM" name="email">
+                    <input type="text" placeholder="Enter Outlook" value="@Program.UserDetails.emailsM" name="email">
                     <button type="submit">Save Microsoft</button>
-                    <button method="post" asp-page-handler="CalendarRemoveMicro" type="submit">Remove</button>
+                    <button class="removeButton" method="post" asp-page-handler="CalendarRemoveMicro" type="submit">Remove</button>
                 </form>
                 <br />
                 <br />
@@ -105,9 +151,11 @@
                 <form class="hiddenGPhoto" method="post" asp-page-handler="GooglePhotos">
                     <input type="text" placeholder="Enter Email" value="@Program.UserDetails.GPhoto" name="email">
                     <button type="submit">Save Google Photos</button>
-                    <button method="post" asp-page-handler="PhotoRemoveGmail" type="submit">Remove</button>
+                    <button class="removeButton" method="post" asp-page-handler="PhotoRemoveGmail" type="submit">Remove</button>
                 </form>
-                <p>Weather</p>
+                <br />
+                <br />
+                <h3>Weather</h3>
                 <hr>
                 <form method="post" asp-page-handler="Weather">
                     <select required class="drop" name="Country" @Model.selCountry>
@@ -136,9 +184,12 @@
                         <option value="imperial">Imperial</option>
                         <option value="kelvin">Kelvin</option>
                     </select>
-                    <input type="submit" value="Get the Weather" />
+                    <br />
+                    <button type="submit">Save Weather</button>
                 </form>
-                <p>News</p>
+                <br />
+                <br />
+                <h3>News</h3>
                 <hr>
                 <form method="post" asp-page-handler="News">
                     <select required class="drop" name="Coun" @Model.selCoun>
@@ -158,13 +209,28 @@
                         <option value="15000">15 seconds</option>
                         <option value="20000">20 seconds</option>
                     </select>
-                    <input type="submit" value="Get the News" />
+                    <br />
+                    <button type="submit">Save News</button>
                 </form>
-
-
+                <br />
+                <br />
+                <br />
+                <hr>
+                <hr>
+                <h3>Contact</h3>
+                <hr>
+                <div id="contact" class="contact-div2">
+                    <form class="contactForm2" action="/" method="post">
+                        <input type="text" class="contactText2" placeholder="Your Name" />
+                        <input type="text" class="contactText2" placeholder="Your Email" />
+                        <textarea class="contactText2" placeholder="Your Message"></textarea>
+                        <button type="submit" class="contactFormBtn">Send</button>
+                    </form>
+                </div>
             </div>
         </div>
     }
+    
     <div class="footer">
         <div class="f1">
             <img src="~/images/VSlogo.svg.png" alt="Visual Studio" />

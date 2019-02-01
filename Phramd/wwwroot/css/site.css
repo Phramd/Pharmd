@@ -1,18 +1,22 @@
 
 body {
     margin: 0 auto;
+    font-family: Dreamlands;
 }
 .footer {
     grid-area: footer;
 }
 .about-div {
     grid-area: about;
+    background: #D3D3D3;
 }
 .contact-div {
     grid-area: contact;
 }
 .slider-div {
     grid-area: slider;
+    height: 400px;
+    padding-top: 10px;
 }
 .accountSettings-div {
     grid-area: slider;
@@ -58,12 +62,90 @@ body {
     .about {
         grid-column: 2;
     }
+
     .contact {
-        grid-column: 3;
+        grid-column: 9;
     }
-    .account {
-        grid-column: 10;
+    .contact-div h2{
+        color: #fff;
     }
+    .border {
+        width: 500px;
+        height: 5px;
+        background: #fff;
+        margin: 40px auto;
+        }
+    .about-div{
+        color: #000;
+        padding: 0 20px;
+        font-family: 'Kravitz Thermal';
+    }
+    .boardInfo{
+        width: 100%;
+        color: #000;
+        font-family: Dreamlands;
+    }
+        .borderAbout {
+            width: 500px;
+            height: 5px;
+            background: #000;
+            margin: 40px auto;
+        }
+    .contactForm{
+        max-width: 800px;
+        margin: auto;
+        padding: 0 10px;
+    }
+    .contactText{
+        display: block;
+        width: 100%;
+        box-sizing:border-box;
+        margin: 10px 0;
+        border: 0;
+        padding: 10px 20px;
+        outline: none;
+        transition: 0.5s;
+    }
+        .contactText:focus {
+            box-shadow: 0 0 10px 8px #4CAF50;
+        }
+        textarea.contactText{
+            resize: none;
+            height: 120px;
+        }
+.contact-div2 h2, h3 {
+    color: #fff;
+}
+.border2 {
+    width: 500px;
+    height: 5px;
+    background: #fff;
+    margin: 40px auto;
+}
+.contactForm2 {
+    margin: auto;
+}
+.contactText2 {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border: 0;
+    margin: 10px 0;
+    padding: 10px 20px;
+    outline: none;
+    transition: 0.5s;
+}
+    .contactText2:focus {
+        box-shadow: 0 0 10px 8px #4CAF50;
+    }
+
+textarea2.contactText {
+    resize: none;
+    height: 120px;
+}
+        .account {
+            grid-column: 10;
+        }
         .accountContent, .unameContetnt {
             display: none;
             position: absolute;
@@ -111,18 +193,28 @@ body {
     color: #fff;
     text-align: left;
 }
-.left {
-    padding-top: 90px;
-    height: auto;
-    width: 50%;
-    float: left;
-}
-.right {
-    padding-top: 90px;
-    height: auto;
-    width: 50%;
-    float: left;
-}
+    .slider img {
+        margin: 0 auto;
+        align-content: center;
+    }
+    .left {
+        height: auto;
+        width: calc(50% - 20px);
+        padding: 0 10px;
+        text-align: left;
+        float: left;
+    }
+    .right {
+        height: auto;
+        width: calc(50% - 20px);
+        padding: 0 10px;
+        text-align: right;
+        float: left;
+    }
+    .left h3, .right h3 {
+        font-family: Dreamlands;
+        color: #000;
+    }
 .footer {
     display: grid;
     width: 100%;
@@ -187,6 +279,7 @@ input[type=text], input[type=password] {
     input[type=text]:focus, input[type=password]:focus {
         background-color: #ddd;
         outline: none;
+        box-shadow: 0 0 10px 8px #4CAF50;
     }
 button {
     background-color: #4CAF50;
@@ -198,9 +291,19 @@ button {
     width: 50%;
     float: left;
 }
-    button:hover {
-        opacity: 1;
-    }
+.removeButton {
+    background-color: #c1272d;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    float: left;
+}
+button:hover, .removeButton:hover {
+    opacity: 1;
+}
 .cancelbtn {
     width: 50%;
     float: left;
@@ -209,26 +312,27 @@ button {
     background-color: #c1272d;
 }
 .container {
-    padding: 16px;
+    padding: 10px 10px 60px 10px;
 }
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 4; 
+    display: none;
+    position: fixed;
+    z-index: 4;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
-    padding-top: 60px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
 }
 .modalContent {
-    background-color: rgb(204,204,204);
+    background-color: rgba(0,0,0,0.6);
+    color: #fff;
     margin: 5% auto 20% auto;
     border: 1px solid #888;
     width: 80%;
+    font-family: 'Kravitz Thermal';
 }
 hr {
     border: 1px solid #f1f1f1;
@@ -263,6 +367,14 @@ hr {
 }
 .gmailCal, .appleCal, .microCal, gPhoto {
     padding: 0 20px 0 20px;
+}
+.drop {
+    padding: 14px 20px;
+    margin: 8px 0;
+}
+.drop option:hover {
+    background-color: rgba(76, 175, 80, 0.7);
+    color: #fff;
 }
 /* Rearrange for smaller screens */
 @media screen and (max-width: 700px) {
