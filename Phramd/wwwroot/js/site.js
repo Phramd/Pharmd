@@ -40,3 +40,15 @@ function carousel() {
     x[myIndex - 1].style.display = "block";
     setTimeout(carousel, 5000);
 }
+
+$(function () {
+    $(".settings").on("click", function () {
+        $(".accountSettings-div").toggle()
+        $(".screenOptions-div").toggle(this.hiddeniden)
+    })
+    $(".screen").on("click", function () {
+        $(".screenOptions-div").toggle()
+        $(".accountSettings-div").toggle(ths.hidden)
+    })
+})
+
