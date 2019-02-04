@@ -21,13 +21,6 @@ body {
 .accountSettings-div {
     grid-area: slider;
 }
-.parent{
-    width: 100%;
-}
-.screenOptions-div {
-    grid-area: slider;
-    display: none;
-}
 .grid-container {
     display: grid;
     grid-template-areas:
@@ -382,14 +375,6 @@ hr {
 .drop option:hover {
     background-color: rgba(76, 175, 80, 0.7);
     color: #fff;
-}
-.screenSettings {
-    padding-top: 90px;
-    height: auto;
-    width: 90%;
-    margin: 0 auto;
-    color: #fff;
-    text-align: left;
 }
 /* Rearrange for smaller screens */
 @media screen and (max-width: 700px) {

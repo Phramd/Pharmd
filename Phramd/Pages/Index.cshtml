@@ -100,9 +100,6 @@
             <div class="settings">
                 <a href="/Index" class="navLinks" onclick="userFunction()">User Settings</a>
             </div>
-            <div class="screen">
-                <a href="#screenOptions" class="navLinks" onclick="userFunction()">Screen Options</a>
-            </div>
             <div class="contact">
                 <a href="#contact" class="navLinks">Contact</a>
             </div>
@@ -118,168 +115,155 @@
                 </div>
             </div>
         </div>
-            <div id="accountSet" class="accountSettings-div">
-                <div id="accountSettings" class="accountSettings">
-                    <h2>User Settings</h2>
-                    <h3>Calendar</h3>
-                    <hr>
-                    <div id="showForm" class="calImages">
-                        <a class="gmailCal" href="#"><img src="~/images/google-calendar-logo.png" alt="google cal image" /></a>
-                        <a class="appleCal" href="#"><img src="~/images/iOS-Calendar-icon.png" alt="apple cal image" /></a>
-                        <a class="microCal" href="#"><img src="~/images/Microsoft_Outlook_2013_logo.svg_-250x250.png" alt="microsoft cal image" /></a>
-                    </div>
-                    <form class="hiddenGmail" method="post" asp-page-handler="CalendarGmail">
-                        <input type="text" placeholder="Enter Gmail" value="@Program.UserDetails.emails" name="email">
-                        <button type="submit">Save Gmail</button>
-                        <button class="removeButton" method="post" asp-page-handler="CalendarRemoveGmail" type="submit">Remove</button>
+        <div id="accountSet" class="accountSettings-div">
+            <div id="accountSettings" class="accountSettings">
+                <h2>User Settings</h2>
+                <h3>Calendar</h3>
+                <hr>
+                <div id="showForm" class="calImages">
+                    <a class="gmailCal" href="#"><img src="~/images/google-calendar-logo.png" alt="google cal image" /></a>
+                    <a class="appleCal" href="#"><img src="~/images/iOS-Calendar-icon.png" alt="apple cal image" /></a>
+                    <a class="microCal" href="#"><img src="~/images/Microsoft_Outlook_2013_logo.svg_-250x250.png" alt="microsoft cal image" /></a>
+                </div>
+                <form class="hiddenGmail" method="post" asp-page-handler="CalendarGmail">
+                    <input type="text" placeholder="Enter Gmail" value="@Program.UserDetails.emails" name="email">
+                    <button type="submit">Save Gmail</button>
+                    <button class="removeButton" method="post" asp-page-handler="CalendarRemoveGmail" type="submit">Remove</button>
+                </form>
+                <form class="hiddenApple" method="post" asp-page-handler="CalendarApple">
+                    <input type="text" placeholder="Enter iCloud" value="@Program.UserDetails.emailsA" name="email">
+                    <button type="submit">Save Apple</button>
+                    <button class="removeButton" method="post" asp-page-handler="CalendarRemoveApple" type="submit">Remove</button>
+                </form>
+                <form class="hiddenMicro" method="post" asp-page-handler="CalendarMicro">
+                    <input type="text" placeholder="Enter Outlook" value="@Program.UserDetails.emailsM" name="email">
+                    <button type="submit">Save Microsoft</button>
+                    <button class="removeButton" method="post" asp-page-handler="CalendarRemoveMicro" type="submit">Remove</button>
+                </form>
+                <br />
+                <br />
+                <h3>Photos</h3>
+                <hr>
+                <div id="showForm" class="calImages">
+                    <a class="gPhoto" href="#"><img src="~/images/google-photos-icon-250x250.png" alt="google photos" /></a>
+                </div>
+                <form class="hiddenGPhoto" method="post" asp-page-handler="GooglePhotos">
+                    <input type="text" placeholder="Enter Email" value="@Program.UserDetails.GPhoto" name="email">
+                    <button type="submit">Save Google Photos</button>
+                    <button class="removeButton" method="post" asp-page-handler="PhotoRemoveGmail" type="submit">Remove</button>
+                </form>
+                <br />
+                <br />
+                <h3>Weather</h3>
+                <hr>
+                <form method="post" asp-page-handler="Weather">
+                    <select required class="drop" name="Country" @Model.selCountry>
+                        <option value="">Select A Country</option>
+                        <option value="CA">Canada</option>
+                    </select>
+                    <select required class="drop" name="City" @Model.selCity>
+                        <option value="">Select A City</option>
+                        <option value="toronto">Toronto</option>
+                        <option value="ottawa">Ottawa</option>
+                        <option value="montreal">Montreal</option>
+                        <option value="gatineau">Gatineau</option>
+                        <option value="quebec">Quebec City</option>
+                        <option value="london">London</option>
+                        <option value="sarnia">Sarnia</option>
+                        <option value="windsor">Windsor</option>
+                        <option value="kitchener">Kitchener</option>
+                        <option value="kingston">Kingston</option>
+                        <option value="oshawa">Oshawa</option>
+                        <option value="hamilton">Hamilton</option>
+                        <option value="guelph">Guelph</option>
+                    </select>
+                    <select required class="drop" name="Unit" @Model.selUnit>
+                        <option value="">Select A Unit of Measurement</option>
+                        <option value="metric">Metric</option>
+                        <option value="imperial">Imperial</option>
+                        <option value="kelvin">Kelvin</option>
+                    </select>
+                    <br />
+                    <button type="submit">Save Weather</button>
+                </form>
+                <br />
+                <br />
+                <h3>News</h3>
+                <hr>
+                <form method="post" asp-page-handler="News">
+                    <select required class="drop" name="Coun" @Model.selCoun>
+                        <option value="">Select A Country</option>
+                        <option value="ca">Canada</option>
+                        <option value="us">United States</option>
+                    </select>
+                    <select required class="drop" name="Articles" @Model.numOfArticles>
+                        <option value="">Amount of Articles Wanted</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                    </select>
+                    <select required class="drop" name="Time">
+                        <option value="">Time To Read Headlines</option>
+                        <option value="10000">10 seconds</option>
+                        <option value="15000">15 seconds</option>
+                        <option value="20000">20 seconds</option>
+                    </select>
+                    <br />
+                    <button type="submit">Save News</button>
+                </form>
+                <br />
+                <br />
+                <h3>Screen Size</h3>
+                <hr>
+                <form method="post" asp-page-handler="ScreenSize">
+                    <select required class="drop" name="Size">
+                        <option value="">Select Screen Size</option>
+                        <option value="912">9 - 12 inch</option>
+                        <option value="1418">14 - 18 inch</option>
+                        <option value="2123">21 - 23 inch</option>
+                    </select>
+                    <select required class="drop" name="Size">
+                        <option value="">Select Screen Layout</option>
+                        <option value="landscape">Landscape</option>
+                        <option value="portrait">Portrait</option> 
+                    </select>
+                    <br />
+                    <button type="submit">Save Screen Settings</button>
+                </form>
+                <br />
+                <br />
+                <h3>Screen Layout</h3>
+                <hr>
+                <br />
+                <br /><br />
+                <br /><br />
+                <br /><br />
+                <br /><br />
+                <br /><br />
+                <br /><br />
+                <br /><br />
+                <br /><br />
+                <br /><br />
+                <br />
+                <button type="submit">Save Layout</button>
+                <br />
+                <br />
+                <br />
+                <hr>
+                <hr>
+                <h3>Contact</h3>
+                <hr>
+                <div id="contact" class="contact-div2">
+                    <form class="contactForm2" action="/" method="post">
+                        <input type="text" class="contactText2" placeholder="Your Name" />
+                        <input type="text" class="contactText2" placeholder="Your Email" />
+                        <textarea class="contactText2" placeholder="Your Message"></textarea>
+                        <button type="submit" class="contactFormBtn">Send</button>
                     </form>
-                    <form class="hiddenApple" method="post" asp-page-handler="CalendarApple">
-                        <input type="text" placeholder="Enter iCloud" value="@Program.UserDetails.emailsA" name="email">
-                        <button type="submit">Save Apple</button>
-                        <button class="removeButton" method="post" asp-page-handler="CalendarRemoveApple" type="submit">Remove</button>
-                    </form>
-                    <form class="hiddenMicro" method="post" asp-page-handler="CalendarMicro">
-                        <input type="text" placeholder="Enter Outlook" value="@Program.UserDetails.emailsM" name="email">
-                        <button type="submit">Save Microsoft</button>
-                        <button class="removeButton" method="post" asp-page-handler="CalendarRemoveMicro" type="submit">Remove</button>
-                    </form>
-                    <br />
-                    <br />
-                    <h3>Photos</h3>
-                    <hr>
-                    <div id="showForm" class="calImages">
-                        <a class="gPhoto" href="#"><img src="~/images/google-photos-icon-250x250.png" alt="google photos" /></a>
-                    </div>
-                    <form class="hiddenGPhoto" method="post" asp-page-handler="GooglePhotos">
-                        <input type="text" placeholder="Enter Email" value="@Program.UserDetails.GPhoto" name="email">
-                        <button type="submit">Save Google Photos</button>
-                        <button class="removeButton" method="post" asp-page-handler="PhotoRemoveGmail" type="submit">Remove</button>
-                    </form>
-                    <br />
-                    <br />
-                    <h3>Weather</h3>
-                    <hr>
-                    <form method="post" asp-page-handler="Weather">
-                        <select required class="drop" name="Country" @Model.selCountry>
-                            <option value="">Select A Country</option>
-                            <option value="CA">Canada</option>
-                        </select>
-                        <select required class="drop" name="City" @Model.selCity>
-                            <option value="">Select A City</option>
-                            <option value="toronto">Toronto</option>
-                            <option value="ottawa">Ottawa</option>
-                            <option value="montreal">Montreal</option>
-                            <option value="gatineau">Gatineau</option>
-                            <option value="quebec">Quebec City</option>
-                            <option value="london">London</option>
-                            <option value="sarnia">Sarnia</option>
-                            <option value="windsor">Windsor</option>
-                            <option value="kitchener">Kitchener</option>
-                            <option value="kingston">Kingston</option>
-                            <option value="oshawa">Oshawa</option>
-                            <option value="hamilton">Hamilton</option>
-                            <option value="guelph">Guelph</option>
-                        </select>
-                        <select required class="drop" name="Unit" @Model.selUnit>
-                            <option value="">Select A Unit of Measurement</option>
-                            <option value="metric">Metric</option>
-                            <option value="imperial">Imperial</option>
-                            <option value="kelvin">Kelvin</option>
-                        </select>
-                        <br />
-                        <button type="submit">Save Weather</button>
-                    </form>
-                    <br />
-                    <br />
-                    <h3>News</h3>
-                    <hr>
-                    <form method="post" asp-page-handler="News">
-                        <select required class="drop" name="Coun" @Model.selCoun>
-                            <option value="">Select A Country</option>
-                            <option value="ca">Canada</option>
-                            <option value="us">United States</option>
-                        </select>
-                        <select required class="drop" name="Articles" @Model.numOfArticles>
-                            <option value="">Amount of Articles Wanted</option>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                        </select>
-                        <select required class="drop" name="Time">
-                            <option value="">Time To Read Headlines</option>
-                            <option value="10000">10 seconds</option>
-                            <option value="15000">15 seconds</option>
-                            <option value="20000">20 seconds</option>
-                        </select>
-                        <br />
-                        <button type="submit">Save News</button>
-                    </form>
-                    <br />
-                    <br />
-                    <br />
-                    <hr>
-                    <hr>
-                    <h3>Contact</h3>
-                    <hr>
-                    <div id="contact" class="contact-div2">
-                        <form class="contactForm2" action="/" method="post">
-                            <input type="text" class="contactText2" placeholder="Your Name" />
-                            <input type="text" class="contactText2" placeholder="Your Email" />
-                            <textarea class="contactText2" placeholder="Your Message"></textarea>
-                            <button type="submit" class="contactFormBtn">Send</button>
-                        </form>
-                    </div>
                 </div>
             </div>
-            <div id="screenOptions" class="screenOptions-div">
-                <div id="screenSettings" class="screenSettings">
-                    <h2>Screen Options</h2>
-                    <h3>Screen Size</h3>
-                    <hr>
-                    <form method="post" asp-page-handler="ScreenSize">
-                        <select required class="drop" name="Size">
-                            <option value="">Select Screen Size</option>
-                            <option value="912">9 - 12 inch</option>
-                            <option value="1418">14 - 18 inch</option>
-                            <option value="2123">21 - 23 inch</option>
-                        </select>
-                        <br />
-                        <button type="submit">Save Screen Size</button>
-                    </form>
-                    <br />
-                    <br />
-                    <h3>Screen Layout</h3>
-                    <hr>
-                    <br />
-                    <br /><br />
-                    <br /><br />
-                    <br /><br />
-                    <br /><br />
-                    <br /><br />
-                    <br /><br />
-                    <br /><br />
-                    <br /><br />
-                    <br /><br />
-                    <br />
-                    <button type="submit">Save Layout</button>
-                    <br />
-                    <br />
-                    <br />
-                    <hr>
-                    <hr>
-                    <h3>Contact</h3>
-                    <hr>
-                    <div id="contact" class="contact-div2">
-                        <form class="contactForm2" action="/" method="post">
-                            <input type="text" class="contactText2" placeholder="Your Name" />
-                            <input type="text" class="contactText2" placeholder="Your Email" />
-                            <textarea class="contactText2" placeholder="Your Message"></textarea>
-                            <button type="submit" class="contactFormBtn">Send</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-          }
+        </div>
+        }
 
                 <div class="footer">
                     <div class="f1">

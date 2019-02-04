@@ -40,15 +40,3 @@ function carousel() {
     x[myIndex - 1].style.display = "block";
     setTimeout(carousel, 5000);
 }
-
-function userFunction() {
-    var x = document.getElementById("accountSet");
-    var y = document.getElementById("screenOptions");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-        y.style.display === "none";
-    } else {
-        x.style.display = "none";
-        y.style.display = "block";
-    }
-}
