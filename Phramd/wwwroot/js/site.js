@@ -41,14 +41,14 @@ function carousel() {
     setTimeout(carousel, 5000);
 }
 
-$(function () {
-    $(".settings").on("click", function () {
-        $(".accountSettings-div").toggle()
-        $(".screenOptions-div").toggle(this.hiddeniden)
-    })
-    $(".screen").on("click", function () {
-        $(".screenOptions-div").toggle()
-        $(".accountSettings-div").toggle(ths.hidden)
-    })
-})
-
+function userFunction() {
+    var x = document.getElementById("accountSet");
+    var y = document.getElementById("screenOptions");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+        y.style.display === "none";
+    } else {
+        x.style.display = "none";
+        y.style.display = "block";
+    }
+}
