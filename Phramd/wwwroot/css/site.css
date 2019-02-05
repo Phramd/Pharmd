@@ -379,3 +379,26 @@ hr {
 /* Rearrange for smaller screens */
 @media screen and (max-width: 700px) {
 }
+
+.resize-drag {
+    background-color: #29e;
+    color: white;
+    font-size: 20px;
+    font-family: sans-serif;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 30px 20px;
+    touch-action: none;
+    width: 120px;
+    box-sizing: border-box;
+    touch-action: none;
+    -ms-touch-action: none;
+}
+
+.resize-container {
+    display: inline-block;
+    margin: 20px;
+    width: calc(100% - 40px);
+    height: 1000px;
+    background: #fff;
+}

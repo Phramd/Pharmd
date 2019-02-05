@@ -225,7 +225,7 @@
                     <select required class="drop" name="Size">
                         <option value="">Select Screen Layout</option>
                         <option value="landscape">Landscape</option>
-                        <option value="portrait">Portrait</option> 
+                        <option value="portrait">Portrait</option>
                     </select>
                     <br />
                     <button type="submit">Save Screen Settings</button>
@@ -234,17 +234,20 @@
                 <br />
                 <h3>Screen Layout</h3>
                 <hr>
-                <br />
-                <br /><br />
-                <br /><br />
-                <br /><br />
-                <br /><br />
-                <br /><br />
-                <br /><br />
-                <br /><br />
-                <br /><br />
-                <br /><br />
-                <br />
+                <div class="resize-container">
+                    <div class="resize-drag">
+                        <h3>Calendar</h3>
+                    </div>
+                    <div class="resize-drag">
+                        <h3>Photos</h3>
+                    </div>
+                    <div class="resize-drag">
+                        <h3>Weather</h3>
+                    </div>
+                    <div class="resize-drag">
+                        <h3>News</h3>
+                    </div>
+                </div>
                 <button type="submit">Save Layout</button>
                 <br />
                 <br />
@@ -263,60 +266,59 @@
                 </div>
             </div>
         </div>
-        }
-
-                <div class="footer">
-                    <div class="f1">
-                        <img src="~/images/VSlogo.svg.png" alt="Visual Studio" />
-                    </div>
-                    <div class="f2">
-                        <img src="~/images/dotnetcoreLogo.png" alt=".Net Core" />
-                    </div>
-                    <div class="f3">
-                        <img src="~/images/csharpLogo.png" alt="C#" />
-                    </div>
-                    <div class="f4">
-                        <p>&copy; 2018 - PHRAMD</p>
-                    </div>
-                    <div class="f5">
-                        <img src="~/images/sqlserverLogo.png" alt="SQL Server" />
-                    </div>
-                    <div class="f6">
-                        <img src="~/images/HTML5Badge.png" alt="HTML 5" />
-                    </div>
-                    <div class="f7">
-                        <img src="~/images/CSS3Logo.png" alt="CSS 3" />
-                    </div>
-                </div>
-                <div id="logIn" class="modal">
-                    <form class="modalContent animate" method="post" asp-page-handler="Login">
-                        <div class="container">
-                            <h1>Login</h1>
-                            <hr>
-                            <label for="username"><b>Username</b></label>
-                            <input type="text" placeholder="Enter Username" name="username" required>
-                            <label for="password"><b>Password</b></label>
-                            <input type="password" placeholder="Enter Password" name="password" required>
-                            <button type="submit">Login</button>
-                            <button type="button" onclick="document.getElementById('logIn').style.display='none'" class="cancelbtn">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-                <div id="register" class="modal">
-                    <form class="modalContent animate" method="post" asp-page-handler="NewUser">
-                        <div class="container">
-                            <h1>Sign Up</h1>
-                            <hr>
-                            <label for="username"><b>Username</b></label>
-                            <input type="text" placeholder="Enter Username" name="username" required>
-                            <label for="email"><b>Email</b></label>
-                            <input type="text" placeholder="Enter Email" name="email" required>
-                            <label for="password"><b>Password</b></label>
-                            <input type="password" placeholder="Enter Password" name="password" required>
-                            <button type="submit">Register</button>
-                            <button type="button" onclick="document.getElementById('register').style.display='none'" class="cancelbtn">Cancel</button>
-                        </div>
-                    </form>
-                </div>
+     }
+    <div class="footer">
+        <div class="f1">
+            <img src="~/images/VSlogo.svg.png" alt="Visual Studio" />
+        </div>
+        <div class="f2">
+            <img src="~/images/dotnetcoreLogo.png" alt=".Net Core" />
+        </div>
+        <div class="f3">
+            <img src="~/images/csharpLogo.png" alt="C#" />
+        </div>
+        <div class="f4">
+            <p>&copy; 2018 - PHRAMD</p>
+        </div>
+        <div class="f5">
+            <img src="~/images/sqlserverLogo.png" alt="SQL Server" />
+        </div>
+        <div class="f6">
+            <img src="~/images/HTML5Badge.png" alt="HTML 5" />
+        </div>
+        <div class="f7">
+            <img src="~/images/CSS3Logo.png" alt="CSS 3" />
+        </div>
+    </div>
+    <div id="logIn" class="modal">
+        <form class="modalContent animate" method="post" asp-page-handler="Login">
+            <div class="container">
+                <h1>Login</h1>
+                <hr>
+                <label for="username"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="username" required>
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required>
+                <button type="submit">Login</button>
+                <button type="button" onclick="document.getElementById('logIn').style.display='none'" class="cancelbtn">Cancel</button>
             </div>
+        </form>
+    </div>
+    <div id="register" class="modal">
+        <form class="modalContent animate" method="post" asp-page-handler="NewUser">
+            <div class="container">
+                <h1>Sign Up</h1>
+                <hr>
+                <label for="username"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="username" required>
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="email" required>
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required>
+                <button type="submit">Register</button>
+                <button type="button" onclick="document.getElementById('register').style.display='none'" class="cancelbtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
 
