@@ -393,6 +393,8 @@ hr {
     box-sizing: border-box;
     touch-action: none;
     -ms-touch-action: none;
+    -webkit-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
 }
 
 .resize-container {
