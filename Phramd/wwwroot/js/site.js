@@ -40,3 +40,8 @@ function carousel() {
     x[myIndex - 1].style.display = "block";
     setTimeout(carousel, 5000);
 }
+
+function ClearFields() {
+    document.getElementById("gPhotoText").value = "";
+    document.getElementById("textfield2").value = "";
+}

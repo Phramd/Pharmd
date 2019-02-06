@@ -148,9 +148,9 @@
                     <a class="gPhoto" href="#"><img src="~/images/google-photos-icon-250x250.png" alt="google photos" /></a>
                 </div>
                 <form class="hiddenGPhoto" method="post" asp-page-handler="GooglePhotos">
-                    <input type="text" placeholder="Enter Email" value="@Program.UserDetails.GPhoto" name="email">
+                    <input id="gPhotoText" type="text" placeholder="Enter Email" value="@Program.UserDetails.GPhoto" name="email">
                     <button type="submit">Save Google Photos</button>
-                    <button class="removeButton" method="post" asp-page-handler="PhotoRemoveGmail" type="submit">Remove</button>
+                    <button class="removeButton" method="post" asp-page-handler="PhotoRemoveGmail" onclick="ClearFields();" @Program.UserDetails.GPhoto.clear() type="submit">Remove</button>
                 </form>
                 <br />
                 <br />
@@ -235,18 +235,32 @@
                 <h3>Screen Layout</h3>
                 <hr>
                 <div class="resize-container">
-                    <div id="test" class="resize-drag">
-                        <h3>Calendar</h3>
-                    </div>
-                    <div id="test2" class="resize-drag">
-                        <h3>Photos</h3>
-                    </div>
-                    <div id="test3" class="resize-drag">
-                        <h3>Weather</h3>
-                    </div>
-                    <div id="test4" class="resize-drag">
-                        <h3>News</h3>
-                    </div>
+                    @if (Program.UserDetails.emails != null 
+                        || Program.UserDetails.emailsA != null 
+                        || Program.UserDetails.emailsM != null)
+                    {
+                        <div id="test" class="resize-drag">
+                            <h3>Calendar</h3>
+                        </div>
+                    }
+                    @if (Program.UserDetails.GPhoto != null)
+                    {
+                        <div id="test2" class="resize-drag">
+                            <h3>Photos</h3>
+                        </div>
+                    }
+                    @if (Program.Weather.selCity != null)
+                    {
+                        <div id="test3" class="resize-drag">
+                            <h3>Weather</h3>
+                        </div>
+                    }
+                    @if (Program.News.selCoun != null)
+                    {
+                        <div id="test4" class="resize-drag">
+                            <h3>News</h3>
+                        </div>
+                    }   
                 </div>
                 <button type="submit">Save Layout</button>
                 <br />

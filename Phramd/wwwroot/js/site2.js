@@ -18,7 +18,7 @@
 
         // minimum size
         restrictSize: {
-            min: { width: 100, height: 50 },
+            min: { width: 150, height: 150 },
         },
 
         inertia: true,
@@ -41,7 +41,7 @@
 
         target.setAttribute('data-x', x);
         target.setAttribute('data-y', y);
-        target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height);
+        //target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height);
     });
 
 function dragMoveListener(event) {

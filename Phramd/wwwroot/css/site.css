@@ -380,7 +380,7 @@ hr {
 @media screen and (max-width: 700px) {
 }
 
-.resize-drag {
+.resize-drag, .resize-drag1 {
     background-color: #29e;
     color: white;
     font-size: 20px;
@@ -389,18 +389,20 @@ hr {
     padding: 20px;
     margin: 30px 20px;
     touch-action: none;
-    width: 120px;
+    width: 150px;
+    height: 150px;
     box-sizing: border-box;
     touch-action: none;
     -ms-touch-action: none;
     -webkit-transform: translate(0px, 0px);
     transform: translate(0px, 0px);
+    display: -webkit-flex;
+    display: flex;
 }
 
 .resize-container {
-    display: inline-block;
     margin: 20px;
     width: calc(100% - 40px);
-    height: 1000px;
+    height: 800px;
     background: #fff;
 }

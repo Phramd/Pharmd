@@ -274,6 +274,8 @@ namespace Phramd.Pages
                     if (result == null)
                     {
                         Program.UserDetails.EmailChanges(Program.UserDetails.UserID);
+                        Program.UserDetails.emails = null;
+
                     }
 
                     myConn.Close();
@@ -301,6 +303,13 @@ namespace Phramd.Pages
 
                     var result = removeCal.ExecuteScalar();
 
+                    if (result == null)
+                    {
+                        Program.UserDetails.EmailChanges(Program.UserDetails.UserID);
+                        Program.UserDetails.emailsA = null;
+
+                    }
+
                     myConn.Close();
                 }
             }
@@ -325,6 +334,13 @@ namespace Phramd.Pages
                     removeCal.CommandType = System.Data.CommandType.StoredProcedure;
 
                     var result = removeCal.ExecuteScalar();
+
+                    if (result == null)
+                    {
+                        Program.UserDetails.EmailChanges(Program.UserDetails.UserID);
+                        Program.UserDetails.emailsM = null;
+
+                    }
 
                     myConn.Close();
                 }
@@ -363,6 +379,36 @@ namespace Phramd.Pages
                     }
 
                     myConn.Close();
+                }
+            }
+        }
+
+        public void OnPostPhotoRemoveGmail(string email)
+        {
+            using (SqlConnection myConn = new SqlConnection(Program.Fetch.cs))
+            {
+                if (Program.UserDetails.UserID != 0)
+                {
+                    SqlCommand removeGPhoto = new SqlCommand
+                    {
+                        Connection = myConn
+                    };
+                    myConn.Open();
+
+                    removeGPhoto.Parameters.AddWithValue("@UserID", Program.UserDetails.UserID);
+                    removeGPhoto.Parameters.AddWithValue("@email", Program.UserDetails.GPhoto);
+
+                    removeGPhoto.CommandText = ("[spRemovePhotoEmail]");
+                    removeGPhoto.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    var result = removeGPhoto.ExecuteScalar();
+
+                    if (result == null)
+                    {
+                        Program.UserDetails.GPhoto = null;
+                    }
+
+                        myConn.Close();
                 }
             }
         }
