@@ -12,6 +12,6 @@ namespace Phramd.GooglePhotos
         public string GPhoto { get; set; }
         public string APhoto { get; set; }
         public string MPhoto { get; set; }
-        public string allGPhotos { get; set; }
+        public List<string> allGPhotos { get; set; }
     }
 }

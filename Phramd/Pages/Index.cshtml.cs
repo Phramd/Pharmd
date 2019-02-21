@@ -16,7 +16,53 @@ namespace Phramd.Pages
         JsonNinja listNinja;
         public string display = "grid";
         public List<string> filter = new List<string>();
-        public string today;
+        public bool IsChecked { get; set; }
+        public string calDate = DateTime.Now.ToString("yyyy/MM/dd");
+        public string calDate1 = DateTime.Now.AddDays(1).ToString("yyyy/MM/dd");
+        public string calDate2 = DateTime.Now.AddDays(2).ToString("yyyy/MM/dd");
+        public string calDate3 = DateTime.Now.AddDays(3).ToString("yyyy/MM/dd");
+        public string calDate4 = DateTime.Now.AddDays(4).ToString("yyyy/MM/dd");
+        public string calEvent1 = DateTime.Now.ToString("dd");
+        public string calEvent2 = DateTime.Now.AddDays(1).ToString("dd");
+        public string calEvent3 = DateTime.Now.AddDays(2).ToString("dd");
+        public string calEvent4 = DateTime.Now.AddDays(3).ToString("dd");
+        public string calEvent5 = DateTime.Now.AddDays(4).ToString("dd");
+
+        // DATE TIME \\
+        // s = short, n = number
+        // day options (number of the month)
+        public string selDay;
+        public string sDay = DateTime.Now.ToString("d"); // number
+        public string day = DateTime.Now.ToString("dd"); // number starting with 0
+        // date options (day of week - ie. Friday)
+        public string selDate;
+        public string sDate = DateTime.Now.ToString("ddd"); // abbreviated day of week
+        public string date = DateTime.Now.ToString("dddd"); // day of week
+        // month options
+        public string selMonth;
+        public string snMonth = DateTime.Now.ToString("M"); // Month #
+        public string nMonth = DateTime.Now.ToString("MM"); // Month # starting with 0
+        public string sMonth = DateTime.Now.ToString("MMM"); // abbreviated month
+        public string month = DateTime.Now.ToString("MMMM");
+        // year options
+        public string selYear;
+        public string sYear = DateTime.Now.ToString("y"); // 19
+        public string year = DateTime.Now.ToString("yyyy"); // 2019
+        // time options
+        public string selTime;
+        public string sTime = DateTime.Now.ToString("t"); // A/P
+        public string time = DateTime.Now.ToString("tt"); // normal am/pm
+        // hour options
+        public string selHour;
+        //public string sHour = DateTime.Now.ToString("h"); // 12hr
+        public string hour = DateTime.Now.ToString("hh"); // 12hr starting with 0 (06:00)
+        //public string military = DateTime.Now.ToString("H"); // 24hr
+        public string selMin;
+        public string minutes = DateTime.Now.ToString("mm");
+        // seconds
+        public string selSec;
+        public string seconds = DateTime.Now.ToString("ss");
+
 
         // WEATHER \\
         // location
@@ -122,7 +168,11 @@ namespace Phramd.Pages
         {
             Program.UserDetails.CheckID(username, password);
             Program.UserDetails.EmailChanges(Program.UserDetails.UserID);
-            Program.UserDetails.PhotoChanges(Program.UserDetails.UserID); 
+            Program.UserDetails.PhotoChanges(Program.UserDetails.UserID);
+            if(Program.UserDetails.emails != null)
+            {
+                Program.Calendar.CalendarSetUp();
+            }
         }
 
         public void OnPostLogout()
@@ -440,8 +490,6 @@ namespace Phramd.Pages
 
             selCity = selCity.Replace("\"", "");
             selCountry = selCountry.Replace("\"", "");
-
-            today = DateTime.Now.ToString("dddd, MMMM dd yyyy HH:mm tt");
 
             // Retrieve information from WeatherData Class
             // weather

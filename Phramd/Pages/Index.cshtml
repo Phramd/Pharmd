@@ -24,6 +24,7 @@
                 <div class="accountContent">
                     <br />
                     <a href="#" onclick="document.getElementById('logIn').style.display='block'" class="navLinks">Login</a><br />
+                    <!--Login Error Here - if the username doesn't match display a message-->
                     <a href="#" onclick="document.getElementById('register').style.display='block'" class="navLinks">Sign Up</a>
                 </div>
             </div>
@@ -118,6 +119,60 @@
         <div id="accountSet" class="accountSettings-div">
             <div id="accountSettings" class="accountSettings">
                 <h2>User Settings</h2>
+                <h3>Date and Time</h3>
+                <hr>
+                <form method="post" asp-page-handler="Date">
+                    <select class="drop" name="ddDay" @Model.selDay>
+                        <option value="">Day</option>
+                        <option value="d">@Model.sDay</option>
+                        <option value="dd">@Model.day</option>
+                    </select>
+                    <select class="drop" name="ddDate" @Model.selDate>
+                        <option value="">Date</option>
+                        <option value="ddd">@Model.sDate</option>
+                        <option value="dddd">@Model.date</option>
+                    </select>
+                    <select class="drop" name="ddMonth" @Model.selMonth>
+                        <option value="">Month</option>
+                        <option value="M">@Model.snMonth</option>
+                        <option value="MM">@Model.nMonth</option>
+                        <option value="MMM">@Model.sMonth</option>
+                        <option value="MMMM">@Model.month</option>
+                    </select>
+                    <select class="drop" name="ddYear" @Model.selYear>
+                        <option value="">Year</option>
+                        <option value="y">@Model.sYear</option>
+                        <option value="">@Model.year</option>
+                    </select>
+                    <br />
+                    <button type="submit">Save Date</button>
+                    <br />
+                </form>
+                <br />
+                <br />
+                <form method="post" asp-page-handler="Time">
+                    <select class="drop" name="ddHours" @Model.selHour>
+                        <option value="">Hours</option>
+                        <option value="hh">@Model.hour</option>
+                    </select>
+                    <select required class="drop" name="ddMinutes" @Model.selMin>
+                        <option value="">Minutes</option>
+                        <option value="mm">@Model.minutes</option>
+                    </select>
+                    <select required class="drop" name="ddSeconds" @Model.selSec>
+                        <option value="">Seconds</option>
+                        <option value="ss">@Model.seconds</option>
+                    </select>
+                    <select class="drop" name="ddTime" @Model.selTime>
+                        <option value="">Time</option>
+                        <option value="t">@Model.sTime</option>
+                        <option value="tt">@Model.time</option>
+                    </select>
+                    <br />
+                    <button type="submit">Save Time</button>
+                    <br />
+                    <br />
+                </form>
                 <h3>Calendar</h3>
                 <hr>
                 <div id="showForm" class="calImages">
@@ -148,9 +203,9 @@
                     <a class="gPhoto" href="#"><img src="~/images/google-photos-icon-250x250.png" alt="google photos" /></a>
                 </div>
                 <form class="hiddenGPhoto" method="post" asp-page-handler="GooglePhotos">
-                    <input id="gPhotoText" type="text" placeholder="Enter Email" value="@Program.UserDetails.GPhoto" name="email">
+                    <input type="text" placeholder="Enter Email" value="@Program.UserDetails.GPhoto" name="email">
                     <button type="submit">Save Google Photos</button>
-                    <button class="removeButton" method="post" asp-page-handler="PhotoRemoveGmail" onclick="ClearFields();" @Program.UserDetails.GPhoto.clear() type="submit">Remove</button>
+                    <button class="removeButton" method="post" asp-page-handler="PhotoRemoveGmail" type="submit">Remove</button>
                 </form>
                 <br />
                 <br />
@@ -232,42 +287,188 @@
                 </form>
                 <br />
                 <br />
+                <h3>Screen Orientation</h3>
+                <form action="/" method="post">
+                    <input id="checkBox" type="checkbox" name="IsChecked" value="Landscape" />
+                    <label>Landscape</label>
+                    <br />
+                    <input id="checkBox" type="checkbox" name="IsChecked" value="Portrait" />
+                    <label>Portrait</label>
+                </form>
+                <br />
+                <button type="submit">Save Orientation</button>
+                <br />
+                <br />
                 <h3>Screen Layout</h3>
                 <hr>
-                <div class="resize-container">
-                    @if (Program.UserDetails.emails != null 
-                        || Program.UserDetails.emailsA != null 
-                        || Program.UserDetails.emailsM != null)
-                    {
-                        <div id="test" class="resize-drag">
-                            <h3>Calendar</h3>
+                @if (Model.IsChecked != false)
+                {
+                    <div class="resize-container-port">
+                        <div id="dayTime" class="resize-drag dt">
+                            <h3>Time of Day</h3>
+                            <!--Take From Computer DateTime
+                            Give options of mm/dd/yyyy time
+                            or dd/mm Time or dddd/dd/mm Time Etc.
+                            Can do this by taking in time, month and date seperatly
+                            rearranging in certain ways and letting them select one
+                            OR yes/no to date option and don't let them choose the display-->
                         </div>
-                    }
-                    @if (Program.UserDetails.GPhoto != null)
-                    {
-                        <div id="test2" class="resize-drag">
+                        <div id="photo" class="resize-drag p">
                             <h3>Photos</h3>
                         </div>
-                    }
-                    @if (Program.Weather.selCity != null)
-                    {
-                        <div id="test3" class="resize-drag">
-                            <h3>Weather</h3>
+                        <div id="calendar" class="resize-drag c">
+                            <h3>Calendar</h3>
                         </div>
-                    }
-                    @if (Program.News.selCoun != null)
-                    {
-                        <div id="test4" class="resize-drag">
-                            <h3>News</h3>
+                        <div id="weather" class="resize-drag w">
+                            <div id="weatherGrid">
+                                <img src="@Url.Content(Model.iconShow)" alt="Weather Icon" />
+                                <p id="cld">Clouds: @Model.all%</p>
+                                <p id="loc">@Model.selCity, @Model.selCountry</p>
+                                <p id="des">@Model.desc</p>
+                                <p id="ris">Sunrise: @Model.riseTime</p>
+                                <p id="set">Sunset: @Model.setTime</p>
+                                <p id="tmp">Currently: @Model.temp</p>
+                                <p id="hot">High: @Model.tempHigh</p>
+                                <p id="low">Low: @Model.tempLow</p>
+                                <p id="spd">Wind Speed: @Model.windSpeed</p>
+                                <p id="dir">Wind Direction: @Model.windText</p>
+                                <p id="hmd">Humidity: @Model.humidity%</p>
+                                <p id="prs">Pressure: @Model.pressure hPa</p>
+                                <p id="vis">Visibility: @Model.visibility</p>
+                            </div>
                         </div>
-                    }   
-                </div>
-                <button type="submit">Save Layout</button>
-                <br />
-                <br />
-                <br />
-                <hr>
-                <hr>
+                        <div id="news" class="resize-drag n">
+                            <div id="newsGrid" style="display: @Model.display" onload="article(@Model.headlineList) && date(@Model.publishedList)">
+                                <p id="headline">@Model.headline</p>
+                                <p id="published">@Model.published</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit">Save Layout</button>
+                    <br />
+                    <br />
+                    <br />
+                    <hr>
+                    <hr>
+                }
+                else
+                {
+                    <div class="resize-container">
+                        <div id="dayTime" class="resize-drag dt">
+                            <h3>Time of Day</h3>
+                            <!--Take From Computer DateTime
+                            Give options of mm/dd/yyyy time
+                            or dd/mm Time or dddd/dd/mm Time Etc.
+                            Can do this by taking in time, month and date seperatly
+                            rearranging in certain ways and letting them select one
+                            OR yes/no to date option and don't let them choose the display-->
+                        </div>
+                        <div id="photo" class="resize-drag p">
+                            <h3>Photos</h3>
+                        </div>
+                        @if(Program.UserDetails.emails != null)
+                        {
+                        <div id="calendar" class="resize-drag c">
+                            <div id="calGrid">
+                                <div id="day1">
+                                    <h3>@Model.calEvent1</h3>
+                                    @for (int i = 0; i < @Program.Calendar.dateFormat.Count; i++)
+                                    {
+                                        @if (@Program.Calendar.dateFormat[i] == @Model.calDate)
+                                        {
+                                            <p>@Program.Calendar.calEvents[i]</p>
+                                            <p>@Program.Calendar.timeFormat[i]</p>
+                                        }
+                                    }
+                                </div>
+                                <div id="day2">
+                                    <h3>@Model.calEvent2</h3>
+                                    @for (int i = 0; i < @Program.Calendar.dateTime.Count; i++)
+                                    {
+                                        @if (@Program.Calendar.dateFormat[i] == @Model.calDate1)
+                                        {
+                                            <p>
+                                                @Program.Calendar.calEvents[i]
+                                                @Program.Calendar.timeFormat[i]
+                                            </p>
+                                        }
+                                    }
+                                </div>
+                                <div id="day3">
+                                    <h3>@Model.calEvent3</h3>
+                                    @for (int i = 0; i < @Program.Calendar.dateTime.Count; i++)
+                                    {
+                                        @if (@Program.Calendar.dateFormat[i] == @Model.calDate2)
+                                        {    
+                                            <p>
+                                                @Program.Calendar.calEvents[i]
+                                                @Program.Calendar.timeFormat[i]
+                                            </p>
+                                        }
+                                    }
+                                </div>
+                                <div id="day4">
+                                    <h3>@Model.calEvent4</h3>
+                                    @for (int i = 0; i < @Program.Calendar.dateTime.Count; i++)
+                                    {
+                                        @if (@Program.Calendar.dateFormat[i] == @Model.calDate3)
+                                        {
+                                            <p>
+                                                @Program.Calendar.calEvents[i]
+                                                @Program.Calendar.timeFormat[i]
+                                            </p>
+                                        }
+                                    }
+                                </div>
+                                <div id="day5">
+                                    <h3>@Model.calEvent5</h3>
+                                    @for (int i = 0; i < @Program.Calendar.dateTime.Count; i++)
+                                    {
+                                        @if (@Program.Calendar.dateFormat[i] == @Model.calDate4)
+                                        {
+                                            <p>
+                                                @Program.Calendar.calEvents[i]
+                                                @Program.Calendar.timeFormat[i]
+                                            </p>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        }
+                        
+                        <div id="weather" class="resize-drag w">
+                            <div id="weatherGrid">
+                                <img src="@Url.Content(Model.iconShow)" alt="Weather Icon" />
+                                <p id="cld">Clouds: @Model.all%</p>
+                                <p id="loc">@Model.selCity, @Model.selCountry</p>
+                                <p id="des">@Model.desc</p>
+                                <p id="ris">Sunrise: @Model.riseTime</p>
+                                <p id="set">Sunset: @Model.setTime</p>
+                                <p id="tmp">Currently: @Model.temp</p>
+                                <p id="hot">High: @Model.tempHigh</p>
+                                <p id="low">Low: @Model.tempLow</p>
+                                <p id="spd">Wind Speed: @Model.windSpeed</p>
+                                <p id="dir">Wind Direction: @Model.windText</p>
+                                <p id="hmd">Humidity: @Model.humidity%</p>
+                                <p id="prs">Pressure: @Model.pressure hPa</p>
+                                <p id="vis">Visibility: @Model.visibility</p>
+                            </div>
+                        </div>
+                        <div id="news" class="resize-drag n">
+                            <div id="newsGrid" style="display: @Model.display" onload="article(@Model.headlineList) && date(@Model.publishedList)">
+                                <p id="headline">@Model.headline</p>
+                                <p id="published">@Model.published</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit">Save Layout</button>
+                    <br />
+                    <br />
+                    <br />
+                    <hr>
+                    <hr>
+                }
                 <h3>Contact</h3>
                 <hr>
                 <div id="contact" class="contact-div2">
@@ -280,7 +481,7 @@
                 </div>
             </div>
         </div>
-     }
+    }
     <div class="footer">
         <div class="f1">
             <img src="~/images/VSlogo.svg.png" alt="Visual Studio" />
@@ -335,4 +536,3 @@
         </form>
     </div>
 </div>
-

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Google.Apis.Calendar.v3;
+using Google.Apis.Calendar.v3.Data;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -14,7 +16,6 @@ namespace Phramd
         public string Gmail { get; set; }
         public string Apple { get; set; }
         public string Microsoft { get; set; }
-
     }   
 }
 

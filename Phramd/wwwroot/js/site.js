@@ -6,23 +6,27 @@ window.onclick = function (event) {
 }
 
 $(function () {
-        $(".gmailCal").on("click", function () {
+        $(".gmailCal").on("click", function (e) {
             $(".hiddenGmail").toggle()
             $(".hiddenApple").toggle(this.hidden)
             $(".hiddenMicro").toggle(this.hidden)
+            e.preventDefault();
         })
-        $(".appleCal").on("click", function () {
+        $(".appleCal").on("click", function (e) {
             $(".hiddenApple").toggle()
             $(".hiddenMicro").toggle(this.hidden)
             $(".hiddenGmail").toggle(this.hidden)
+            e.preventDefault();
         })
-        $(".microCal").on("click", function () {
+        $(".microCal").on("click", function (e) {
             $(".hiddenMicro").toggle()
             $(".hiddenApple").toggle(this.hidden)
             $(".hiddenGmail").toggle(this.hidden)
+            e.preventDefault();
         })
-        $(".gPhoto").on("click", function () {
+        $(".gPhoto").on("click", function (e) {
             $(".hiddenGPhoto").toggle()
+            e.preventDefault();
         })
     }
 )
@@ -44,4 +48,8 @@ function carousel() {
 function ClearFields() {
     document.getElementById("gPhotoText").value = "";
     document.getElementById("textfield2").value = "";
+}
+
+function preventDefault(e) {
+    e.preventDefault();
 }

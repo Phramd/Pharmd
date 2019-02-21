@@ -16,6 +16,12 @@ namespace Phramd
     public class Calendar
     {
         public bool isAddCalendar { get; set; }
+        public List<string> summary = new List<string>();
+        public List<string> time = new List<string>();
+        public List<string> timeFormat = new List<string>();
+        public List<string> dateTime = new List<string>();
+        public List<string> dateFormat = new List<string>();
+        public List<string> calEvents = new List<string>();
 
         static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
         static string ApplicationName = "Phramd";
@@ -35,6 +41,7 @@ namespace Phramd
                     CancellationToken.None,
                     new FileDataStore(credPath, true)).Result;
             }
+            DateTime endDate = DateTime.Now.AddDays(5);
 
             var service = new CalendarService(new BaseClientService.Initializer()
             {
@@ -44,15 +51,15 @@ namespace Phramd
 
             EventsResource.ListRequest request = service.Events.List("primary");
             request.TimeMin = DateTime.Now;
+            request.TimeMax = endDate; 
             request.ShowDeleted = false;
             request.SingleEvents = true;
-            request.MaxResults = 10;
+            //request.MaxResults = 20;
             request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
 
             Events events = request.Execute();
 
-
-            Console.WriteLine("Upcoming events:");
+            //Console.WriteLine("Upcoming events:");
             if (events.Items != null && events.Items.Count > 0)
             {
                 foreach (var eventItem in events.Items)
@@ -60,19 +67,17 @@ namespace Phramd
                     string when = eventItem.Start.DateTime.ToString();
                     if (String.IsNullOrEmpty(when))
                     {
-                        when = eventItem.Start.Date;
+                        when = eventItem.Start.Date;   
                     }
-                    Console.WriteLine("{0} ({1})", eventItem.Summary, when);
+                    time = when.Split(',').ToList();
+                    timeFormat.Add(time[0].Remove(0,10));
+                    dateTime.Add(time[0]);
+                    dateFormat.Add(time[0].Substring(0,10));
+                    summary = eventItem.Summary.Split(',').ToList();
+                    calEvents.Add(summary[0]);
                 }
             }
-            else
-            {
-                Console.WriteLine("No upcoming events found.");
-            }
-            Console.Read();
-
         }
     }
-
 }
 
