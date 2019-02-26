@@ -21,7 +21,7 @@ namespace Phramd.GooglePhotos
         public bool IsWriteable { get; set; }
 
         [JsonProperty(PropertyName = "shareInfo")]
-        public ShareInfo ShareInfo { get; set; }
+        public string ShareInfo { get; set; }
 
         [JsonProperty(PropertyName = "mediaItemsCount")]
         public string MediaItemsCount { get; set; }

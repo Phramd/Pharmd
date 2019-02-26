@@ -15,6 +15,10 @@ namespace Phramd.GooglePhotos
 
         private const string GetAlbumUrl = "https://photoslibrary.googleapis.com/v1/albums/{albumId}";
 
+        private const string ListShareContents = "https://photoslibrary.googleapis.com/v1/sharedAlbums:join";
+
+        public const string GetShareInfo = "https://photoslibrary.googleapis.com/v1/sharedAlbums/{ShareToken}";
+
         private const string ListAlbumURLContents = "https://photoslibrary.googleapis.com/v1/mediaItems/";
 
         private const string GetAlbumContents = "https://photoslibrary.googleapis.com/v1/mediaItems/{mediaItemId}";

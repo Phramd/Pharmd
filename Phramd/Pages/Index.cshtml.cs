@@ -425,7 +425,6 @@ namespace Phramd.Pages
                             new GooglePhotos.GooglePhotosClientIntegrationTests();
                         GooglePhotos.Test_ListAlbums_GetFirstAlbum();
                         GooglePhotos.ListAlbumContent();
-
                     }
 
                     myConn.Close();

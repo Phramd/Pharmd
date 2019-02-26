@@ -6,6 +6,7 @@ using Google.Apis.Util.Store;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Phramd;
+using Phramd.GooglePhotos;
 using Phramd.Utility;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace Phramd
         public static Calendar Calendar = new Calendar();
         public static CalendarDetails CalendarDetails = new CalendarDetails();
         public static Fetch Fetch = new Fetch();
-        public static GooglePhotos.PhotoDetails PhotoDetails = new GooglePhotos.PhotoDetails();
+        public static PhotoDetails PhotoDetails = new PhotoDetails();
         public static Weather Weather = new Weather();
         public static WeatherData WeatherData = new WeatherData();
         public static News News = new News();

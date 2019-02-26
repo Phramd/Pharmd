@@ -235,7 +235,6 @@ textarea2.contactText {
         margin: 0 auto;
         align-content: center;
     }
-
 .left {
     height: auto;
     width: calc(50% - 20px);
@@ -535,6 +534,8 @@ input[type=checkbox] {
     max-width: 86.2%;
     height: inherit;
     margin: 0px;
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 .c {

@@ -16,5 +16,8 @@ namespace Phramd.GooglePhotos
 
         [JsonProperty(PropertyName = "productUrl")]
         public string productUrl { get; set; }
+
+        [JsonProperty(PropertyName = "baseUrl")]//URL
+        public string BaseUrl { get; set; }
     }
 }

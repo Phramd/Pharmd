@@ -363,9 +363,19 @@
                             rearranging in certain ways and letting them select one
                             OR yes/no to date option and don't let them choose the display-->
                         </div>
-                        <div id="photo" class="resize-drag p">
-                            <h3>Photos</h3>
+                        @if (Program.UserDetails.GPhoto != null)
+                        {
+                        <div id="photo" class="resize-drag p">  
+                                
+                                    <div>
+                                        @for (int i = 0; i < @Program.PhotoDetails.allGPhotos.Count; i++)
+                                        {
+                                            <img class="mySlides" src="@Program.PhotoDetails.allGPhotos[i]" />
+                                        }
+                                    </div>
+                               
                         </div>
+                        }
                         @if(Program.UserDetails.emails != null)
                         {
                         <div id="calendar" class="resize-drag c">
