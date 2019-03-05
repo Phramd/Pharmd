@@ -45,15 +45,7 @@ function carousel() {
     setTimeout(carousel, 5000);
 }
 
-
-
-
-
 function ClearFields() {
     document.getElementById("gPhotoText").value = "";
     document.getElementById("textfield2").value = "";
-}
-
-function preventDefault(e) {
-    e.preventDefault();
-}
+};

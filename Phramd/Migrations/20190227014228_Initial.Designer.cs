@@ -10,7 +10,7 @@ using Phramd.Models;
 namespace Phramd.Migrations
 {
     [DbContext(typeof(PhramdContext))]
-    [Migration("20190129135413_Initial")]
+    [Migration("20190227014228_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,6 +104,29 @@ namespace Phramd.Migrations
                     b.ToTable("PhotoAccounts");
                 });
 
+            modelBuilder.Entity("Phramd.Models.ScreenOptions", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("UserID");
+
+                    b.Property<DateTime>("optionsadded");
+
+                    b.Property<DateTime>("optionsremoved");
+
+                    b.Property<string>("screensize");
+
+                    b.Property<string>("sreenlayout");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("ScreenOptions");
+                });
+
             modelBuilder.Entity("Phramd.Models.User", b =>
                 {
                     b.Property<int>("id")
@@ -175,6 +198,14 @@ namespace Phramd.Migrations
                 });
 
             modelBuilder.Entity("Phramd.Models.PhotoAccounts", b =>
+                {
+                    b.HasOne("Phramd.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Phramd.Models.ScreenOptions", b =>
                 {
                     b.HasOne("Phramd.Models.User", "User")
                         .WithMany()

@@ -257,51 +257,60 @@
                         <option value="10">10</option>
                         <option value="20">20</option>
                     </select>
-                    <select required class="drop" name="Time">
+                    <select id="dropTime" required class="drop" name="Time">
                         <option value="">Time To Read Headlines</option>
                         <option value="10000">10 seconds</option>
                         <option value="15000">15 seconds</option>
                         <option value="20000">20 seconds</option>
                     </select>
                     <br />
-                    <button type="submit">Save News</button>
+                    <button type="submit" onClick="getTime();">Save News</button>
                 </form>
                 <br />
                 <br />
                 <h3>Screen Size</h3>
                 <hr>
-                <form method="post" asp-page-handler="ScreenSize">
-                    <select required class="drop" name="Size">
-                        <option value="">Select Screen Size</option>
-                        <option value="912">9 - 12 inch</option>
-                        <option value="1418">14 - 18 inch</option>
-                        <option value="2123">21 - 23 inch</option>
+                @if(@Program.UserDetails.screenSizeSelected != null)
+                {
+                <form method="post"  asp-page-handler="ScreenSize">
+                    <select required class="drop" name="ScreenSize">
+                        <option value="">@Program.UserDetails.screenSizeSelected</option>
+                        <option value="9 - 12 inch">9 - 12 inch</option>
+                        <option value="14 - 18 inch">14 - 18 inch</option>
+                        <option value="21 - 23 inch">21 - 23 inch</option>
                     </select>
-                    <select required class="drop" name="Size">
+                    <select required class="drop" name="ScreenLayout">
+                        <option value="">@Program.UserDetails.screenLayoutSelected</option>
+                        <option value="Landscape">Landscape</option>
+                        <option value="Portrait">Portrait</option>
+                    </select>
+                    <br />             
+                    <button type="submit">Save Screen Settings</button>
+                </form>
+                }
+                else
+                {
+                <form method="post" asp-page-handler="ScreenSize">
+                    <select required class="drop" name="ScreenSize">
+                        <option value="">Select Screen Size</option>
+                        <option value="9 - 12 inch">9 - 12 inch</option>
+                        <option value="14 - 18 inch">14 - 18 inch</option>
+                        <option value="21 - 23 inch">21 - 23 inch</option>
+                    </select>
+                    <select required class="drop" name="ScreenLayout">
                         <option value="">Select Screen Layout</option>
-                        <option value="landscape">Landscape</option>
-                        <option value="portrait">Portrait</option>
+                        <option value="Landscape">Landscape</option>
+                        <option value="Portrait">Portrait</option>
                     </select>
                     <br />
                     <button type="submit">Save Screen Settings</button>
                 </form>
-                <br />
-                <br />
-                <h3>Screen Orientation</h3>
-                <form action="/" method="post">
-                    <input id="checkBox" type="checkbox" name="IsChecked" value="Landscape" />
-                    <label>Landscape</label>
-                    <br />
-                    <input id="checkBox" type="checkbox" name="IsChecked" value="Portrait" />
-                    <label>Portrait</label>
-                </form>
-                <br />
-                <button type="submit">Save Orientation</button>
+                }
                 <br />
                 <br />
                 <h3>Screen Layout</h3>
                 <hr>
-                @if (Model.IsChecked != false)
+                @if (Program.UserDetails.screenLayoutSelected == "Portrait")
                 {
                     <div class="resize-container-port">
                         <div id="dayTime" class="resize-drag dt">
@@ -363,17 +372,13 @@
                             rearranging in certain ways and letting them select one
                             OR yes/no to date option and don't let them choose the display-->
                         </div>
-                        @if (Program.UserDetails.GPhoto != null)
+                        @if (Program.UserDetails.GPhoto != null && Program.PhotoDetails.allGPhotos != null)
                         {
                         <div id="photo" class="resize-drag p">  
-                                
-                                    <div>
-                                        @for (int i = 0; i < @Program.PhotoDetails.allGPhotos.Count; i++)
-                                        {
-                                            <img class="mySlides" src="@Program.PhotoDetails.allGPhotos[i]" />
-                                        }
-                                    </div>
-                               
+                            @for (int i = 0; i < @Program.PhotoDetails.allGPhotos.Count; i++)
+                            {
+                                <img class="photoSlides" src="@Program.PhotoDetails.allGPhotos[i]" />
+                            } 
                         </div>
                         }
                         @if(Program.UserDetails.emails != null)
@@ -386,8 +391,10 @@
                                     {
                                         @if (@Program.Calendar.dateFormat[i] == @Model.calDate)
                                         {
-                                            <p>@Program.Calendar.calEvents[i]</p>
-                                            <p>@Program.Calendar.timeFormat[i]</p>
+                                            <p>
+                                                @Program.Calendar.calEvents[i]<br />
+                                                @Program.Calendar.timeFormat[i]
+                                            </p>
                                         }
                                     }
                                 </div>
@@ -398,7 +405,7 @@
                                         @if (@Program.Calendar.dateFormat[i] == @Model.calDate1)
                                         {
                                             <p>
-                                                @Program.Calendar.calEvents[i]
+                                                @Program.Calendar.calEvents[i]<br />
                                                 @Program.Calendar.timeFormat[i]
                                             </p>
                                         }
@@ -411,7 +418,7 @@
                                         @if (@Program.Calendar.dateFormat[i] == @Model.calDate2)
                                         {    
                                             <p>
-                                                @Program.Calendar.calEvents[i]
+                                                @Program.Calendar.calEvents[i]<br />
                                                 @Program.Calendar.timeFormat[i]
                                             </p>
                                         }
@@ -424,7 +431,7 @@
                                         @if (@Program.Calendar.dateFormat[i] == @Model.calDate3)
                                         {
                                             <p>
-                                                @Program.Calendar.calEvents[i]
+                                                @Program.Calendar.calEvents[i]<br />
                                                 @Program.Calendar.timeFormat[i]
                                             </p>
                                         }
@@ -437,7 +444,7 @@
                                         @if (@Program.Calendar.dateFormat[i] == @Model.calDate4)
                                         {
                                             <p>
-                                                @Program.Calendar.calEvents[i]
+                                                @Program.Calendar.calEvents[i]<br />
                                                 @Program.Calendar.timeFormat[i]
                                             </p>
                                         }
@@ -466,9 +473,17 @@
                             </div>
                         </div>
                         <div id="news" class="resize-drag n">
-                            <div id="newsGrid" style="display: @Model.display" onload="article(@Model.headlineList) && date(@Model.publishedList)">
-                                <p id="headline">@Model.headline</p>
-                                <p id="published">@Model.published</p>
+                            <div id="newsGrid" style="display: @Model.display" onload="article(@Model.headlineList) && date(@Model.publishedList)">                              
+                                @if (Model.headlineList != null)
+                                {
+                                    @for (int i = 0; i < Model.headlineList.Count; i++)
+                                    {
+                                        <div class="newsSlider">
+                                            <p id="headline">@Model.headlines[i]</p>
+                                            <p id="published">@Model.publishDates[i]</p>   
+                                        </div>
+                                    }
+                                }   
                             </div>
                         </div>
                     </div>

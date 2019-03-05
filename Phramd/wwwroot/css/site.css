@@ -473,8 +473,7 @@ input[type=checkbox] {
     display: flex;
 }
 .resize-container-port {
-    margin: 20px;
-    width: 75%;
+    width: 50%;
     height: 800px;
     background: #fff;
     -ms-flex-wrap: wrap;
@@ -513,7 +512,6 @@ input[type=checkbox] {
     grid-auto-rows: minmax(auto, auto);
     grid-template-areas: "day1" "day2" "day3" "day4" "day5";
     font-size: 15px;
-    padding: 7px 0 7px 0;
 }
 #day2, #day4 {
     background: rgba(120,120,120,0.8);
@@ -534,9 +532,15 @@ input[type=checkbox] {
     max-width: 86.2%;
     height: inherit;
     margin: 0px;
-    background-repeat: no-repeat;
-    background-size: 100%;
+    padding: 0px;
+    background: none;
 }
+    .photoSlides{
+        width: 100%;
+        height: auto;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
 
 .c {
     /* calendar drag/resize class */
@@ -697,8 +701,10 @@ input[type=checkbox] {
     display: grid;
     text-align: center;
     grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: minmax(50px, auto);
-    grid-template-areas: "hdl hdl" "pbl pbl";
+    grid-auto-rows: minmax(auto, auto);
+    grid-template-areas: 
+        "hdl hdl" 
+        "pbl pbl";
 }
 
 #headline {

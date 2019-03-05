@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,6 +17,10 @@ namespace Phramd
         public string emailsM { get; set; }
         public int emailMicroID { get; set; }
         public string GPhoto { get; set; }
+        public string screenSizeSelected { get; set; }
+        public string screenLayoutSelected { get; set; }
+        public List<string> result = new List<string>();
+
 
         public void CheckID(string username, string password)
         {
@@ -123,5 +128,36 @@ namespace Phramd
                 }
             }
         }
+
+        public void ScreenChanges(int UserID)
+        {
+            using (SqlConnection myConn = new SqlConnection(Program.Fetch.cs))
+            {
+                //Screen Size and Layout
+                SqlCommand returnScreenOptions = new SqlCommand();
+                returnScreenOptions.Connection = myConn;
+                myConn.Open();
+
+                returnScreenOptions.Parameters.AddWithValue("@UserID", UserID);
+
+                returnScreenOptions.CommandText = ("[spScreenLayoutandSizeReturn]");
+                returnScreenOptions.CommandType = CommandType.StoredProcedure;
+                using (SqlDataReader reader = returnScreenOptions.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {   
+                        result.Add(reader.GetString(0));
+                        result.Add(reader.GetString(1));
+                        screenSizeSelected = Convert.ToString(result[0]);
+                        screenLayoutSelected = Convert.ToString(result[1]);
+                        result.Clear();
+                    }
+
+                    reader.Close();
+                }
+                returnScreenOptions.Cancel();
+                myConn.Close();
+            }
+        }     
     }
 }

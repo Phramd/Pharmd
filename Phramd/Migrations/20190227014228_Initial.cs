@@ -96,16 +96,41 @@ namespace Phramd.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+           
+
+            migrationBuilder.CreateTable(
+                name: "ScreenOptions",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    screensize = table.Column<string>(nullable: false),
+                    sreenlayout = table.Column<string>(nullable: false),
+                    optionsadded = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
+                    optionsremoved = table.Column<DateTime>(nullable: true),
+                    UserID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ScreenOptions", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_ScreenOptions_User_UserID",
+                        column: x => x.UserID,
+                        principalTable: "User",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Weather",
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    country = table.Column<string>(nullable: false, defaultValue: "CA"),
-                    city = table.Column<string>(nullable: false, defaultValue: "London"),
-                    unit = table.Column<string>(nullable: false, defaultValue: "metric"),
-                    status = table.Column<string>(nullable: false, defaultValue: "A"),
+                    country = table.Column<string>(nullable: false),
+                    city = table.Column<string>(nullable: false),
+                    unit = table.Column<string>(nullable: false),
+                    status = table.Column<string>(nullable: false),
                     userId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -135,6 +160,11 @@ namespace Phramd.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ScreenOptions_UserID",
+                table: "ScreenOptions",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Weather_userId",
                 table: "Weather",
                 column: "userId");
@@ -150,6 +180,9 @@ namespace Phramd.Migrations
 
             migrationBuilder.DropTable(
                 name: "PhotoAccounts");
+
+            migrationBuilder.DropTable(
+                name: "ScreenOptions");
 
             migrationBuilder.DropTable(
                 name: "Weather");

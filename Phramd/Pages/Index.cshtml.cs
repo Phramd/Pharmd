@@ -16,7 +16,7 @@ namespace Phramd.Pages
         JsonNinja listNinja;
         public string display = "grid";
         public List<string> filter = new List<string>();
-        public bool IsChecked { get; set; }
+
         public string calDate = DateTime.Now.ToString("yyyy/MM/dd");
         public string calDate1 = DateTime.Now.AddDays(1).ToString("yyyy/MM/dd");
         public string calDate2 = DateTime.Now.AddDays(2).ToString("yyyy/MM/dd");
@@ -169,15 +169,26 @@ namespace Phramd.Pages
             Program.UserDetails.CheckID(username, password);
             Program.UserDetails.EmailChanges(Program.UserDetails.UserID);
             Program.UserDetails.PhotoChanges(Program.UserDetails.UserID);
-            if(Program.UserDetails.emails != null)
+            Program.UserDetails.ScreenChanges(Program.UserDetails.UserID);
+            if (Program.UserDetails.emails != null)
             {
                 Program.Calendar.CalendarSetUp();
+            }
+            if(Program.UserDetails.GPhoto != null)
+            {
+                GooglePhotos.GooglePhotosClientIntegrationTests GooglePhotos =
+                            new GooglePhotos.GooglePhotosClientIntegrationTests();
+                GooglePhotos.ListAlbumContent();
             }
         }
 
         public void OnPostLogout()
         {
             Program.UserDetails.UserID = 0;
+            Program.UserDetails.emails = null;
+            Program.UserDetails.screenLayoutSelected = null;
+            Program.UserDetails.screenSizeSelected = null;
+            Program.UserDetails.GPhoto = null;
         }
 
         public void OnPostNewUser(string username, string email, string password)
@@ -773,6 +784,33 @@ namespace Phramd.Pages
             }
             // Refresh the settings page @ weather pos on page
         } //OnPostNews()
+
+        public void OnPostScreenSize(string screenSize, string screenLayout)
+        {
+            using (SqlConnection myConn = new SqlConnection(Program.Fetch.cs))
+            {
+                if (Program.UserDetails.UserID != 0)
+                {
+                    SqlCommand addScreen = new SqlCommand
+                    {
+                        Connection = myConn
+                    };
+                    myConn.Open();
+
+                    addScreen.Parameters.AddWithValue("@UserID", Program.UserDetails.UserID);
+                    addScreen.Parameters.AddWithValue("@ScreenSize", screenSize);
+                    addScreen.Parameters.AddWithValue("@ScreenLayout", screenLayout);
+
+                    addScreen.CommandText = ("[spAddScreen]");
+                    addScreen.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    addScreen.ExecuteNonQuery();
+
+                    myConn.Close();
+                }
+            }
+            Program.UserDetails.ScreenChanges(Program.UserDetails.UserID);
+        }
     }
 }
 
