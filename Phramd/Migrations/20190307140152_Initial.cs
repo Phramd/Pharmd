@@ -96,7 +96,7 @@ namespace Phramd.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-           
+
 
             migrationBuilder.CreateTable(
                 name: "ScreenOptions",
@@ -127,10 +127,10 @@ namespace Phramd.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    country = table.Column<string>(nullable: false),
-                    city = table.Column<string>(nullable: false),
-                    unit = table.Column<string>(nullable: false),
-                    status = table.Column<string>(nullable: false),
+                    country = table.Column<string>(nullable: false, defaultValue: "CA"),
+                    city = table.Column<string>(nullable: false, defaultValue: "London"),
+                    unit = table.Column<string>(nullable: false, defaultValue: "Metric"),
+                    status = table.Column<string>(nullable: false, defaultValue: "A"),
                     userId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -144,9 +144,87 @@ namespace Phramd.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "DTFormatsDB",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Day = table.Column<string>(nullable: true),
+                    Date = table.Column<string>(nullable: true),
+                    Month = table.Column<string>(nullable: true),
+                    Year = table.Column<string>(nullable: true),
+                    Hour = table.Column<string>(nullable: true),
+                    Minute = table.Column<string>(nullable: true),
+                    Seconds = table.Column<string>(nullable: true),
+                    Time = table.Column<string>(nullable: true),
+                    UserID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DTFormatsDB", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_DTFormatsDB_User_UserID",
+                        column: x => x.UserID,
+                        principalTable: "User",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Layout",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    calX = table.Column<decimal>(nullable: true),
+                    calY = table.Column<decimal>(nullable: true),
+                    calW = table.Column<decimal>(nullable: true),
+                    calH = table.Column<decimal>(nullable: true),
+                    weathX = table.Column<decimal>(nullable: true),
+                    weathY = table.Column<decimal>(nullable: true),
+                    weathW = table.Column<decimal>(nullable: true),
+                    weathH = table.Column<decimal>(nullable: true),
+                    newsX = table.Column<decimal>(nullable: true),
+                    newsY = table.Column<decimal>(nullable: true),
+                    newsW = table.Column<decimal>(nullable: true),
+                    newsH = table.Column<decimal>(nullable: true),
+                    dateX = table.Column<decimal>(nullable: true),
+                    dateY = table.Column<decimal>(nullable: true),
+                    dateW = table.Column<decimal>(nullable: true),
+                    dateH = table.Column<decimal>(nullable: true),
+                    timeX = table.Column<decimal>(nullable: true),
+                    timeY = table.Column<decimal>(nullable: true),
+                    timeW = table.Column<decimal>(nullable: true),
+                    timeH = table.Column<decimal>(nullable: true),
+                    layoutadded = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
+                    layoutremoved = table.Column<DateTime>(nullable: true),
+                    UserID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Layout", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Layout_User_UserID",
+                        column: x => x.UserID,
+                        principalTable: "User",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_CalendarModel_UserID",
                 table: "CalendarModel",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DTFormatsDB_UserID",
+                table: "DTFormatsDB",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Layout_UserID",
+                table: "Layout",
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
@@ -174,6 +252,12 @@ namespace Phramd.Migrations
         {
             migrationBuilder.DropTable(
                 name: "CalendarModel");
+
+            migrationBuilder.DropTable(
+                name: "DTFormatsDB");
+
+            migrationBuilder.DropTable(
+                name: "Layout");
 
             migrationBuilder.DropTable(
                 name: "News");

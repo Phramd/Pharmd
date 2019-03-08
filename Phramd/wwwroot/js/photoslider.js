@@ -10,4 +10,4 @@ function photoSlider() {
     if (index > y.length) { index = 1 }
     y[index - 1].style.display = "block";
     setTimeout(photoSlider, 30000);
-}
+};

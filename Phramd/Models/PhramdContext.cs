@@ -17,6 +17,8 @@ namespace Phramd.Models
         public DbSet<WeatherDB> Weather { get; set; }
         public DbSet<NewsDB> News { get; set; }
         public DbSet<ScreenOptions> ScreenOptions { get; set; }
+        public DbSet<Layout> Layout { get; set; }
+        public DbSet<DTFormatsDB> DTFormatsDB { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +28,8 @@ namespace Phramd.Models
             modelBuilder.Entity<NewsDB>().ToTable("News");
             modelBuilder.Entity<WeatherDB>().ToTable("Weather");
             modelBuilder.Entity<ScreenOptions>().ToTable("ScreenOptions");
+            modelBuilder.Entity<Layout>().ToTable("Layout");
+            modelBuilder.Entity<DTFormatsDB>().ToTable("DTFormatsDB");
         }
     }
 }

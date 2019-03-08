@@ -41,7 +41,6 @@
 
         target.setAttribute('data-x', x);
         target.setAttribute('data-y', y);
-        //target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height);
     });
 
 function dragMoveListener(event) {
@@ -60,5 +59,6 @@ function dragMoveListener(event) {
     target.setAttribute('data-y', y);
 }
 
-// this is used later in the resizing and gesture demos
+
+// this is used later in the resizing
 window.dragMoveListener = dragMoveListener;

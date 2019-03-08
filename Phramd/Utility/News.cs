@@ -7,6 +7,7 @@ namespace Phramd.Utility
 {
     public class News
     {
+        public string selTime { get; set; }
         public string selCoun { get; set; }
         public string numOfArticles { get; set; }
     }

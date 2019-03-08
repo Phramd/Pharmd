@@ -15,7 +15,7 @@ namespace Phramd.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -45,6 +45,96 @@ namespace Phramd.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("CalendarModel");
+                });
+
+            modelBuilder.Entity("Phramd.Models.DTFormatsDB", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Date");
+
+                    b.Property<string>("Day");
+
+                    b.Property<string>("Hour");
+
+                    b.Property<string>("Minute");
+
+                    b.Property<string>("Month");
+
+                    b.Property<string>("Seconds");
+
+                    b.Property<string>("Time");
+
+                    b.Property<int>("UserID");
+
+                    b.Property<string>("Year");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("DTFormatsDB");
+                });
+
+            modelBuilder.Entity("Phramd.Models.Layout", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("UserID");
+
+                    b.Property<decimal>("calH");
+
+                    b.Property<decimal>("calW");
+
+                    b.Property<decimal>("calX");
+
+                    b.Property<decimal>("calY");
+
+                    b.Property<decimal>("dateH");
+
+                    b.Property<decimal>("dateW");
+
+                    b.Property<decimal>("dateX");
+
+                    b.Property<decimal>("dateY");
+
+                    b.Property<DateTime>("layoutadded");
+
+                    b.Property<DateTime>("layoutremoved");
+
+                    b.Property<decimal>("newsH");
+
+                    b.Property<decimal>("newsW");
+
+                    b.Property<decimal>("newsX");
+
+                    b.Property<decimal>("newsY");
+
+                    b.Property<decimal>("timeH");
+
+                    b.Property<decimal>("timeW");
+
+                    b.Property<decimal>("timeX");
+
+                    b.Property<decimal>("timeY");
+
+                    b.Property<decimal>("weathH");
+
+                    b.Property<decimal>("weathW");
+
+                    b.Property<decimal>("weathX");
+
+                    b.Property<decimal>("weathY");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Layout");
                 });
 
             modelBuilder.Entity("Phramd.Models.NewsDB", b =>
@@ -114,9 +204,9 @@ namespace Phramd.Migrations
 
                     b.Property<DateTime>("optionsremoved");
 
-                    b.Property<string>("screensize");
+                    b.Property<string>("screenlayout");
 
-                    b.Property<string>("sreenlayout");
+                    b.Property<string>("screensize");
 
                     b.HasKey("id");
 
@@ -180,6 +270,22 @@ namespace Phramd.Migrations
                 });
 
             modelBuilder.Entity("Phramd.Models.CalendarModel", b =>
+                {
+                    b.HasOne("Phramd.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Phramd.Models.DTFormatsDB", b =>
+                {
+                    b.HasOne("Phramd.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Phramd.Models.Layout", b =>
                 {
                     b.HasOne("Phramd.Models.User", "User")
                         .WithMany()

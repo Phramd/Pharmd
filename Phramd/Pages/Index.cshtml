@@ -23,7 +23,7 @@
                 <a href="#" class="navLinks"><i class="fas fa-user-circle"></i></a>
                 <div class="accountContent">
                     <br />
-                    <a href="#" onclick="document.getElementById('logIn').style.display='block'" class="navLinks">Login</a><br />
+                    <a href="#" onclick="document.getElementById('logIn').style.display='block'" class="navLinks">Login</a><br />                  
                     <!--Login Error Here - if the username doesn't match display a message-->
                     <a href="#" onclick="document.getElementById('register').style.display='block'" class="navLinks">Sign Up</a>
                 </div>
@@ -163,7 +163,7 @@
                         <option value="">Seconds</option>
                         <option value="ss">@Model.seconds</option>
                     </select>
-                    <select class="drop" name="ddTime" @Model.selTime>
+                    <select class="drop" name="ddTime" @Model.selAP>
                         <option value="">Time</option>
                         <option value="t">@Model.sTime</option>
                         <option value="tt">@Model.time</option>
@@ -203,8 +203,8 @@
                     <a class="gPhoto" href="#"><img src="~/images/google-photos-icon-250x250.png" alt="google photos" /></a>
                 </div>
                 <form class="hiddenGPhoto" method="post" asp-page-handler="GooglePhotos">
-                    <input type="text" placeholder="Enter Email" value="@Program.UserDetails.GPhoto" name="email">
-                    <button type="submit">Save Google Photos</button>
+                    <input id="gmailEmail" type="text" placeholder="Enter Email" value="@Program.UserDetails.GPhoto" name="email">
+                    <button id="gPButton" type="submit">Save Google Photos</button>
                     <button class="removeButton" method="post" asp-page-handler="PhotoRemoveGmail" type="submit">Remove</button>
                 </form>
                 <br />
@@ -257,14 +257,14 @@
                         <option value="10">10</option>
                         <option value="20">20</option>
                     </select>
-                    <select id="dropTime" required class="drop" name="Time">
+                    <select id="dropTime" required class="drop" name="@Model.selTime">
                         <option value="">Time To Read Headlines</option>
                         <option value="10000">10 seconds</option>
                         <option value="15000">15 seconds</option>
                         <option value="20000">20 seconds</option>
                     </select>
                     <br />
-                    <button type="submit" onClick="getTime();">Save News</button>
+                    <button type="submit">Save News</button>
                 </form>
                 <br />
                 <br />
@@ -274,13 +274,13 @@
                 {
                 <form method="post"  asp-page-handler="ScreenSize">
                     <select required class="drop" name="ScreenSize">
-                        <option value="">@Program.UserDetails.screenSizeSelected</option>
+                        <option value="@Program.UserDetails.screenSizeSelected">@Program.UserDetails.screenSizeSelected</option>
                         <option value="9 - 12 inch">9 - 12 inch</option>
                         <option value="14 - 18 inch">14 - 18 inch</option>
                         <option value="21 - 23 inch">21 - 23 inch</option>
                     </select>
                     <select required class="drop" name="ScreenLayout">
-                        <option value="">@Program.UserDetails.screenLayoutSelected</option>
+                        <option value="@Program.UserDetails.screenLayoutSelected">@Program.UserDetails.screenLayoutSelected</option>
                         <option value="Landscape">Landscape</option>
                         <option value="Portrait">Portrait</option>
                     </select>
@@ -347,7 +347,7 @@
                             </div>
                         </div>
                         <div id="news" class="resize-drag n">
-                            <div id="newsGrid" style="display: @Model.display" onload="article(@Model.headlineList) && date(@Model.publishedList)">
+                            <div id="newsGrid" >
                                 <p id="headline">@Model.headline</p>
                                 <p id="published">@Model.published</p>
                             </div>
@@ -473,17 +473,17 @@
                             </div>
                         </div>
                         <div id="news" class="resize-drag n">
-                            <div id="newsGrid" style="display: @Model.display" onload="article(@Model.headlineList) && date(@Model.publishedList)">                              
+                            <div id="newsGrid">
                                 @if (Model.headlineList != null)
                                 {
                                     @for (int i = 0; i < Model.headlineList.Count; i++)
                                     {
                                         <div class="newsSlider">
                                             <p id="headline">@Model.headlines[i]</p>
-                                            <p id="published">@Model.publishDates[i]</p>   
+                                            <p id="published">@Model.publishDates[i]</p>
                                         </div>
                                     }
-                                }   
+                                }
                             </div>
                         </div>
                     </div>
@@ -493,6 +493,30 @@
                     <br />
                     <hr>
                     <hr>
+                    <div id="hiddenLayoutSubmit">
+                        <form id="layoutSubmit" method="post">
+                            <input id="1" type="text" class="layoutSubmitInput" value="" name="calX" />
+                            <input id="2" type="text" class="layoutSubmitInput" value="" name="calY" />
+                            <input id="3" type="text" class="layoutSubmitInput" value="" name="calW" />
+                            <input id="4" type="text" class="layoutSubmitInput" value="" name="calH" />
+                            <input id="5" type="text" class="layoutSubmitInput" value="" name="weathX" />
+                            <input id="6" type="text" class="layoutSubmitInput" value="" name="weathY" />
+                            <input id="7" type="text" class="layoutSubmitInput" value="" name="weathW" />
+                            <input id="8" type="text" class="layoutSubmitInput" value="" name="weathH" />
+                            <input id="9" type="text" class="layoutSubmitInput" value="" name="newsX" />
+                            <input id="10" type="text" class="layoutSubmitInput" value="" name="newsY" />
+                            <input id="11" type="text" class="layoutSubmitInput" value="" name="newsW" />
+                            <input id="12" type="text" class="layoutSubmitInput" value="" name="newsH" />
+                            <input id="13" type="text" class="layoutSubmitInput" value="" name="dateX" />
+                            <input id="14" type="text" class="layoutSubmitInput" value="" name="dateY" />
+                            <input id="15" type="text" class="layoutSubmitInput" value="" name="dateW" />
+                            <input id="16" type="text" class="layoutSubmitInput" value="" name="dateH" />
+                            <input id="17" type="text" class="layoutSubmitInput" value="" name="timeX" />
+                            <input id="18" type="text" class="layoutSubmitInput" value="" name="timeY" />
+                            <input id="19" type="text" class="layoutSubmitInput" value="" name="timeW" />
+                            <input id="20" type="text" class="layoutSubmitInput" value="" name="timeH" />
+                        </form>
+                    </div>
                 }
                 <h3>Contact</h3>
                 <hr>
@@ -540,7 +564,7 @@
                 <label for="password"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="password" required>
                 <button type="submit">Login</button>
-                <button type="button" onclick="document.getElementById('logIn').style.display='none'" class="cancelbtn">Cancel</button>
+                <button type="button" onclick="document.getElementById('logIn').style.display='none'" class="cancelbtn">Cancel</button>        
             </div>
         </form>
     </div>

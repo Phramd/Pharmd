@@ -49,7 +49,7 @@ namespace Phramd.Pages
         public string sYear = DateTime.Now.ToString("y"); // 19
         public string year = DateTime.Now.ToString("yyyy"); // 2019
         // time options
-        public string selTime;
+        public string selAP;
         public string sTime = DateTime.Now.ToString("t"); // A/P
         public string time = DateTime.Now.ToString("tt"); // normal am/pm
         // hour options
@@ -113,6 +113,7 @@ namespace Phramd.Pages
         //people/colours
 
         // NEWS
+        public string selTime;
         public string selCoun;
         public string numOfArticles;
         public string headline;
@@ -123,35 +124,9 @@ namespace Phramd.Pages
         public List<string> publishedList;
         public DateTime publishedDate;
         // stop from skipping over
-        public List<string> headlines = new List<string>();
-        public string headlineOne;
-        public string headlineTwo;
-        public string headlineThree;
-        public string headlineFour;
-        public string headlineFive;
-        public List<string> channels = new List<string>();
-        public string channelOne;
-        public string channelTwo;
-        public string channelThree;
-        public string channelFour;
-        public string channelFive;
+        public List<string> headlines = new List<string>();  
         public List<string> publishDates = new List<string>();
-        public string publishedOne;
-        public string publishedTwo;
-        public string publishedThree;
-        public string publishedFour;
-        public string publishedFive;
-
-        // headlines (timer?)
-        public void Timer(int Time)
-        {
-            Timer tick = new Timer();
-            tick.Elapsed += new ElapsedEventHandler(articleSwitch); // switches article
-            tick.Interval = Time; // time interval for article switch
-            // defualt 15s - set up if for 10 and 20 seconds (dropdown list)
-            tick.Enabled = true; // timer is on
-            tick.AutoReset = true;
-        }
+        
         private void articleSwitch(object sender, ElapsedEventArgs e)
         {
             headline = Program.NewsData.GetHeadline();
@@ -739,7 +714,7 @@ namespace Phramd.Pages
                 headline = headline.Replace("\"", "");
                 Program.NewsData.AddHeadline(headline);
                 publishedList = jNinja.GetDetails("\"publishedAt\"");
-                published = publishedList[0];
+                published = publishedList[i];
                 published = published.Replace("\"", "");
                 published = published.Replace("T", " ");
                 published = published.Replace("Z", "");
@@ -750,7 +725,6 @@ namespace Phramd.Pages
             }
             headline = Program.NewsData.GetHeadline();
             published = Program.NewsData.GetPublished();
-            Timer(Time);
 
             if (Program.UserDetails.UserID == 0) // not logged in
             {
